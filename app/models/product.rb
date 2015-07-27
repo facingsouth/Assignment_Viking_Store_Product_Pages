@@ -1,4 +1,8 @@
 class Product < ActiveRecord::Base
+  has_many :order_contents
+  has_many :orders, through: :order_contents
+
+  belongs_to :category
 
   def self.product_count(timeframe = 1000000)
 
