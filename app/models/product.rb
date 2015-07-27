@@ -2,7 +2,17 @@ class Product < ActiveRecord::Base
   has_many :order_contents
   has_many :orders, through: :order_contents
 
+  has_many :users, through: :orders
+
   belongs_to :category
+
+  def times_ordered
+    self.orders.where("checkout_date IS NOT NULL").count
+  end
+
+  def in_cart
+    self.orders.where("checkout_date IS NULL").count
+  end
 
   def self.product_count(timeframe = 1000000)
 

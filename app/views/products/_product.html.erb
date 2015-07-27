@@ -3,9 +3,9 @@
   <td><%= product.name %></td>
   <td><%= product.sku %></td>
   <td><%= product.description %></td>
-  <td><%= product.price %></td>
-  <% if product.category_id %>
-  <td><%= link_to product.category_id, category_path(product.category_id) %></td>
+  <td><%= number_to_currency(product.price) %></td>
+  <% if product.category %>
+  <td><%= link_to product.category.name, category_path(product.category_id) %></td>
   <% else %>
   <td>N/A</td>
   <% end %>

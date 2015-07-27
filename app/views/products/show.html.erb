@@ -1,0 +1,10 @@
+<ul>
+  <li>Product ID: <%= @product.id %></li>
+  <li>Product Name: <%= @product.name %></li>
+  <li>Product Description: <%= @product.description %></li>
+  <li>Product Category: <%= @product.category.name %></li>
+  <li>This product has been ordered <strong><%= @product.times_ordered %></strong> times!</li>
+  <li>This product is present in <strong><%= @product.in_cart %></strong> carts!</li>
+  <li><%= link_to "edit", edit_product_path(@product) %></li>
+  <li><%= link_to "delete", product_path(@product), method: :delete,  data: {confirm: "Really really delete this product?"} %></li>
+</ul>
