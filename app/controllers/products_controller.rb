@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
       flash[:success] = "New product created."
       redirect_to products_path
     else
-      flash.now[:error] = "Your product cannot be created."
+      flash.now[:error] = @product.errors.full_messages.first
       render :new
     end
   end
@@ -34,12 +34,21 @@ class ProductsController < ApplicationController
       flash[:success] = "Product successfully modified."
       redirect_to products_path
     else
-      flash.now[:error] = "Your product cannot be created."
+      flash.now[:error] = @product.errors.full_messages.first
       render :edit
     end
   end
 
   def destroy
+    session[:return_to] ||= request.referer
+    @product = Product.find(params[:id])
+    if @product.destroy
+      flash[:success] = "Product successfully deleted."
+      redirect_to products_path
+    else
+      flash[:error] = @product.errors.full_messages.first
+      redirect_to session.delete(:return_to)
+    end
   end
 
   private

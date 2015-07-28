@@ -1,0 +1,29 @@
+<%= form_for @address do |f| %>
+
+  <% if @address.persisted? %>
+    <%= "address ID: #{@address.id}" %>
+  <% else %>
+    <p>N/A</p>
+  <% end %>
+  <br>
+  <%=f.label :street_address %>
+  <%=f.text_field :street_address, class: "form-control" %><br>
+
+  <%=f.label :secondary_address %>
+  <%=f.text_field :secondary_address, class: "form-control" %><br>
+
+  <%=f.label :price %>
+  <%=f.text_field :price, class: "form-control" %><br>
+
+  <%= content_tag :div, class: "form-group" do -%>
+  <%= f.label "Category" %><br>
+  <%= f.collection_select :category_id,
+                          Category.all,
+                          :id,
+                          :name
+                           %>
+  <% end -%>
+
+  <%=f.submit %>
+
+<% end %>

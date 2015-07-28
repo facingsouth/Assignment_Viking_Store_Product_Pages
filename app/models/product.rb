@@ -6,6 +6,12 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
 
+  validates :price, 
+            :numericality => { :greater_than => 0, 
+                               :less_than_or_equal_to => 10000,
+                               :message => "Must be between 0 and 10000." }
+
+
   def times_ordered
     self.orders.where("checkout_date IS NOT NULL").count
   end

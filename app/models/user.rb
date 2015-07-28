@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
 
   # Last 7 Days
 
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def self.user_count(timeframe = nil)
 
     if timeframe.nil?
