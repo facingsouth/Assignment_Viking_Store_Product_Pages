@@ -1,20 +1,126 @@
 <%= form_for @address do |f| %>
 
-  <% if @address.persisted? %>
-    <%= "address ID: #{@address.id}" %>
-  <% else %>
-    <p>N/A</p>
-  <% end %>
-  <br>
-  <%=f.label :street_address %>
-  <%=f.text_field :street_address, class: "form-control" %><br>
+  <div class = "row">
 
-  <%=f.label :secondary_address %>
-  <%=f.text_field :secondary_address, class: "form-control" %><br>
+    <div class = "col-sm-4">
+      <p>
+        <strong>Owner ID: </strong>
+      </p>
+    </div>
 
- 
+    <div class = "col-sm-8">
+      <p>
+        <%= @user.id %>
+      </p>
+    </div>
 
+  </div><br>
 
-  <%=f.submit %>
+  <div class = "row">
 
+    <div class = "col-sm-4">
+      <p>
+        <strong>Owner Name: </strong>
+      </p>
+    </div>
+
+    <div class = "col-sm-8">
+      <p>
+        <%= link_to "#{@user.full_name} (click to view)", @user %>
+      </p>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :street_address %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :street_address, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :secondary_address %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :secondary_address, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+ <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :street_address %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :street_address, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :city %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :city, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :state %>
+    </div>
+
+    <div class = "col-sm-8">
+      <!-- Needs to be a dropdown of 50 states -->
+      <%=f.text_field :state, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :zip_code %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :zip_code, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @address.id.nil? %>
+      <%= f.submit "Create address", class: 'btn btn-lg btn-success' %>
+    <% else %>
+      <%= f.submit "Update address", class: 'btn btn-lg btn-success' %>
+    <% end %>
+
+  <% end -%>
 <% end %>
+
+
+<% unless @address.id.nil? %>
+  <%= link_to user_path(@user), method: :delete, class: "alert-danger", data: { confirm: "Are you sure?" } do %>
+    <%= button_tag(type: 'button', class: 'btn btn-lg btn-alert-danger') do %>
+      <%= content_tag(:strong, 'Delete User') %>
+    <% end %>
+  <% end %>
+<% end -%>
+

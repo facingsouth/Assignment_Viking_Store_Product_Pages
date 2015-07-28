@@ -6,7 +6,7 @@
     </h3>
 
     <br>
-    <%= link_to new_address_path do %>
+    <%= link_to new_address_path({user_id: @user.id}) do %>
       <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do %>
           <%= content_tag(:strong, "Create a New Address for #{@user.full_name}") %>
       <% end %>
