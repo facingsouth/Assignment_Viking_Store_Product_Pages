@@ -1,0 +1,12 @@
+<ul>
+  <li>Street Address: <%= @address.street_address %></li>
+  <li>Secondary Address: <%= @address.secondary_address %></li>
+  <li>Zip Code: <%= @address.zip_code %></li>
+  <li>City ID: <%= @address.city_id %></li>
+  <li>State ID: <%= @address.state_id %></li>
+  <li>User ID: <%= @address.user_id %></li>
+  
+  
+  <li><%= link_to "edit", edit_address_path(@address) %></li>
+  <li><%= link_to "delete", address_path(@address), method: :delete,  data: {confirm: "Really really delete this address?"} %></li>
+</ul>

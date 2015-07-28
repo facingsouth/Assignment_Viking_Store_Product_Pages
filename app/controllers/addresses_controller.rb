@@ -40,11 +40,13 @@ class AddressesController < ApplicationController
 
   def edit
     @address = Address.find(params[:id])
+
     @user = User.find(@address.user_id)
   end
 
   def update
     @address = Address.find(params[:id])
+    @address.city_id = check_city(params[:address][:city])
     if @address.update(white_listed_address_params)
       flash[:success] = "Address successfully modified."
       redirect_to addresses_path

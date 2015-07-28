@@ -40,7 +40,7 @@
       <%= f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
 
       <br><br>
-      <%= link_to "View saved addresses" %>
+      <%= link_to "View saved addresses" , addresses_path({user_id: @user.id}) %>
     <%else%>
       <%= f.collection_select(:addresses, @user.addresses, :id, :street_address, {},{:disabled => "disabled"} ) %>
     <% end -%>

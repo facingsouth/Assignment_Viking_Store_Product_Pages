@@ -1,0 +1,121 @@
+<%= form_for @address do |f| %>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <p>
+        <strong>Owner ID: </strong>
+      </p>
+    </div>
+
+    <div class = "col-sm-8">
+      <p>
+        <%= @user.id %>
+      </p>
+    </div>
+
+  </div><br>
+
+  <input type="hidden" id="user_id" name="address[user_id]" value=<%= @user.id %> />
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <p>
+        <strong>Owner Name: </strong>
+      </p>
+    </div>
+
+    <div class = "col-sm-8">
+      <p>
+        <%= link_to "#{@user.full_name} (click to view)", @user %>
+      </p>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :street_address %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :street_address, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :secondary_address %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :secondary_address, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :city %>
+    </div>
+
+    <div class = "col-sm-8">
+      <% if @address.id %>
+        <%=f.text_field :city, value: "#{@address.city.name}",  class: "form-control" %>
+      <% else %>
+        <%=f.text_field :city, class: "form-control" %>
+      <% end -%>
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :state_id %>
+    </div>
+
+    <div class = "col-sm-8">
+      <!-- Needs to be a dropdown of 50 states -->
+       <%= f.collection_select(:state_id, State.all, :id, :name) %>
+      
+    </div>
+
+  </div><br>
+
+  <div class = "row">
+
+    <div class = "col-sm-4">
+      <%=f.label :zip_code %>
+    </div>
+
+    <div class = "col-sm-8">
+      <%=f.text_field :zip_code, class: "form-control" %>
+    </div>
+
+  </div><br>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @address.id.nil? %>
+      <%= f.submit "Create address", class: 'btn btn-lg btn-success' %>
+    <% else %>
+      <%= f.submit "Update address", class: 'btn btn-lg btn-success' %>
+    <% end %>
+
+  <% end -%>
+<% end %>
+
+
+<% unless @address.id.nil? %>
+  <%= link_to user_path(@user), method: :delete, class: "alert-danger", data: { confirm: "Are you sure?" } do %>
+    <%= button_tag(type: 'button', class: 'btn btn-lg btn-alert-danger') do %>
+      <%= content_tag(:strong, 'Delete User') %>
+    <% end %>
+  <% end %>
+<% end -%>
+

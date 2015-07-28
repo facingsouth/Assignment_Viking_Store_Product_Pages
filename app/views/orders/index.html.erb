@@ -1,0 +1,43 @@
+<div class="row text-center">
+
+  <% if @user %>
+    <h3>
+      <%= @user.full_name %>'s Orders
+    </h3>
+
+    <br>
+    <%= link_to new_order_path({user_id: @user.id}) do %>
+      <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do %>
+          <%= content_tag(:strong, "Create a New Order for #{@user.full_name}") %>
+      <% end %>
+    <% end %>
+
+  <% else %>
+    <h3>Viking Store Orders</h3>
+  <% end -%>
+
+</div>
+<hr>
+<% unless @user %>
+  <h4>
+    Orders can only be created in User profile. <a href="/users">See all users here.</a>
+  </h4>
+<% end -%>
+<div class="row scrollable">
+  <table class="table table-bordered">
+    <tr>
+      <th>ID</th>
+      <th>User_id</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Total Value</th>
+      <th>Status</th>
+      <th>Date placed</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <%= render @orders %>
+  </table>
+</div>
