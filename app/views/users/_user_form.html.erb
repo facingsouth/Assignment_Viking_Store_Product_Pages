@@ -25,13 +25,13 @@
   <% end -%>
 
   <%= content_tag :div, class: "form-group" do -%>
-  <%= f.label "Category" %><br>
-  <%= f.collection_select :user,
-                          :shipping_address_id,
-                          User.addresses,
-                          :id,
-                          "Your addresses"
-                           %>
+    <%= f.label "billing_id" %><br>
+    <%= f.text_field :billing_id, class: "form-control" %> 
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <%= f.label "shipping_id" %><br>
+    <%= f.text_field :shipping_id, class: "form-control" %>
   <% end -%>
 
 <!--   <input type = "hidden" name = "sku" value = "<%# (Faker::Code.ean).to_i %>"> -->

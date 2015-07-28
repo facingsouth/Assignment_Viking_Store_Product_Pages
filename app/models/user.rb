@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
+
   has_many :credit_cards, dependent: :destroy
+
   has_many :orders
 
   has_many :order_contents, through: :orders
@@ -30,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def orders_in_cart
-    self.orders.where("checkout_date IS NULL").count
+    self.orders.where("checkout_date IS NULL")
   end
 
   def self.user_count(timeframe = nil)

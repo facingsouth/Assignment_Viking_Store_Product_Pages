@@ -1,13 +1,16 @@
-<div class="row">
+<div class="row text-center">
   <h3>Viking Store Addresses</h3>
 
   <%= link_to new_address_path do %>
-    <button class="btn btn-primary btn-lg col-xs-8 col-xs-offset-2">Create address</button>
+    <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+          content_tag(:strong, 'Create New Address')
+    end %>
   <% end %>
 
 </div>
+<hr>
 
-<div class="row">
+<div class="row scrollable">
   <table class="table table-bordered">
     <tr>
       <th>ID</th>

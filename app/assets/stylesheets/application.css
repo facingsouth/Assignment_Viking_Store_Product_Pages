@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+div.push-content {
+  height: 60px;
+}
+
+.scrollable {
+  max-height: 500px;
+  overflow: auto;  
+}

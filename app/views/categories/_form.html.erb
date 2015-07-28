@@ -1,17 +1,30 @@
 <%=form_for @category do |f|%>
 
-  <% if @category.persisted? %>
-    <%= "Category ID: #{@category.id}" %>
-  <% else %>
-    <p>N/A</p>
-  <% end %>
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @category.persisted? %>
+      <%= "Category ID: #{@category.id}" %>
+    <% else %>
+      <p>Category ID: N/A</p>
+    <% end %>
+  <% end -%>
 
-  <%=f.label :name %>
-  <%=f.text_field :name %>
+  <%= content_tag :div, class: "form-group" do -%>
+    <%=f.label :name %>
+    <%=f.text_field :name %>
+  <%= end -%>
 
-  <%=f.label :description %>
-  <%=f.text_area :description %>
+  <%= content_tag :div, class: "form-group" do -%>
+    <%=f.label :description %>
+    <%=f.text_area :description %>
+  <%= end -%>
 
-  <%=f.submit %>
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @category.persisted? %>
+      <%= f.submit "Create new category", class: 'btn btn-lg btn-success' %>
+    <% else %>
+      <%= f.submit "Update category", class: 'btn btn-lg btn-success' %>
+    <% end %>
+
+  <% end -%>
 
 <% end %>

@@ -1,0 +1,48 @@
+<h2><%= @user.full_name %></h2>
+<ul>
+  <li>User ID: <%= @user.id %></li>
+  <li>User email: <%= @user.email %></li>
+  <li>
+    <%= link_to address_path(@user.billing_id) do %>
+      Billing address id: <%= @user.billing_id %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to address_path(@user.shipping_id) do %>
+      Shipping address id: <%= @user.shipping_id %>
+    <% end %>
+  </li>
+  <li>
+    <% if @user.orders_in_cart.empty? %>
+      Nothing in cart.
+    <% else %>
+      <%= link_to "Cart", "#"%>
+    <% end %>
+  </li>
+  <li>
+    <p>Credit Cards</p>
+    <table class="table-bordered">
+      <tr>
+        <th>nickname</th>
+        <th>card_number</th>
+        <th>exp_month</th>
+        <th>exp_year</th>
+        <th>brand</th>
+      </tr>
+      <% @user.credit_cards.each do |card| %>
+        <tr>
+          <td><%= card.nickname %></td>
+          <td><%= card.card_number %></td>
+          <td><%= card.exp_month %></td>
+          <td><%= card.exp_year %></td>
+          <td><%= card.brand %></td>
+        </tr>
+      <% end %>
+    </table>
+  </li>
+  
+
+  
+  <li><%= link_to "edit", edit_user_path(@user) %></li>
+  <li><%= link_to "delete", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
+</ul>
