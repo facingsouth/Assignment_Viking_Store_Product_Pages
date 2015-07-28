@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
               class_name: "Address",
               foreign_key: :billing_id
 
+  has_many :cities, through: :addresses
+  has_many :states, through: :addresses
+
 
   # 1. Overall Platform
 
@@ -20,6 +23,14 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def orders_checked_out
+    self.orders.where("checkout_date IS NOT NULL").order("checkout_date DESC")
+  end
+
+  def orders_in_cart
+    self.orders.where("checkout_date IS NULL").count
   end
 
   def self.user_count(timeframe = nil)

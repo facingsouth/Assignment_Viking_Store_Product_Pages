@@ -1,0 +1,57 @@
+<div class = "col-sm-9 text-center">
+
+    <h2>Viking Store Users</h2>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <%= link_to new_user_path do %>
+          <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+                content_tag(:strong, 'Create New User!')
+          end %>
+        <% end -%>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <table class="table table-hover table-striped">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Joined</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Orders</th>
+              <th>Last Order</th>
+              <th>Show</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+            <% @users.each do |user| %>
+              <tr>
+                <td> <%= user.id %> </td>
+                <td> <%= user.full_name %> </td>
+                <td> <%= user.created_at.to_date %> </td>
+                <td> <%= user.cities.first.name %> </td>
+                <td> <%= user.states.first.name %> </td>
+                <td> <%= user.orders_checked_out.count %> </td>
+                <% if user.orders_checked_out.empty? %>
+                  <td> No orders </td>
+                <% else %>
+                  <td> <%= user.orders_checked_out.first.checkout_date %> </td>
+                <% end -%>
+                <td> <%= link_to 'Show', user %> </td>
+                <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
+                <td> <%= link_to 'Delete', user_path(user), method: :delete, class: "alert-danger", 
+                        data: { confirm: "Are you sure?" } %> </td>
+              </tr>
+            <% end %>
+
+        </table>
+      </div>
+    </div>
+
+
+</div>

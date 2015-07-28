@@ -1,0 +1,48 @@
+<%= form_for @user do |f| %>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @user.id.nil? %>
+      <h4>Welcome, valued user</h4>
+    <% else %>
+      <h4>Welcome <%= @user.full_name %></h4>
+    <% end %>
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <%= f.label "First name" %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  <% end -%>
+
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <%= f.label "Last name" %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <%= f.label "Email" %>
+    <%= f.text_field :email, class: "form-control" %>
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+  <%= f.label "Category" %><br>
+  <%= f.collection_select :user,
+                          :shipping_address_id,
+                          User.addresses,
+                          :id,
+                          "Your addresses"
+                           %>
+  <% end -%>
+
+<!--   <input type = "hidden" name = "sku" value = "<%# (Faker::Code.ean).to_i %>"> -->
+
+  <%= content_tag :div, class: "form-group" do -%>
+    <% if @user.id.nil? %>
+      <%= f.submit "Create new user", class: 'btn btn-lg btn-success' %>
+    <% else %>
+      <%= f.submit "Update user", class: 'btn btn-lg btn-success' %>
+    <% end %>
+
+  <% end -%>
+
+<% end -%>

@@ -12,6 +12,7 @@ class Order < ActiveRecord::Base
               class_name: "Address",
               foreign_key: :billing_id
 
+
   def self.order_count(timeframe = 100000000000000)
 
     if timeframe.nil?
