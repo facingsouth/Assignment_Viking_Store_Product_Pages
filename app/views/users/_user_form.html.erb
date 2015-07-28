@@ -24,12 +24,15 @@
     <%= f.text_field :email, class: "form-control" %>
   <% end %>
 
-  <%# content_tag :div, class: "form-group" do -%>
-  <%# f.label "Category" %><br>
-  <%# f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
+  <%= content_tag :div, class: "form-group" do -%>
+  <%= f.label "Addresses" %><br>
+    <%if @user.addresses.first%>
+    <%= f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
+    <%else%>
+    <%= f.collection_select(:addresses, @user.addresses, :id, :street_address, {},{:disabled => "disabled"} ) %>
+    <% end -%>
 
-
-  <%# end -%>
+  <% end -%>
 
 
 

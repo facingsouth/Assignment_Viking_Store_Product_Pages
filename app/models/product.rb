@@ -10,7 +10,10 @@ class Product < ActiveRecord::Base
             :numericality => { :greater_than => 0, 
                                :less_than_or_equal_to => 10000,
                                :message => "Must be between 0 and 10000." }
+  validates :sku,
+              :uniqueness => {:message => "Needs to be unique"}
 
+  validates :name, :description, :price, :presence => { :message => "Can not be blank" }
 
   def times_ordered
     self.orders.where("checkout_date IS NOT NULL").count

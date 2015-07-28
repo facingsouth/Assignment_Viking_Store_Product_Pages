@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+  validates :first_name, :last_name, :email,  
+            :length => {:in => (1..64), :message => "Must be between 1 and 64 characters."}
+  validates :email, :format => {:with => /@/}
+
+            
+
+
   has_many :addresses, dependent: :destroy
 
   has_many :credit_cards, dependent: :destroy
