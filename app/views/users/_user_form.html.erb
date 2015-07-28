@@ -22,19 +22,16 @@
   <%= content_tag :div, class: "form-group" do -%>
     <%= f.label "Email" %>
     <%= f.text_field :email, class: "form-control" %>
-  <% end -%>
+  <% end %>
 
-  <%= content_tag :div, class: "form-group" do -%>
-  <%= f.label "Category" %><br>
-  <%= f.collection_select :user,
-                          :shipping_address_id,
-                          User.addresses,
-                          :id,
-                          "Your addresses"
-                           %>
-  <% end -%>
+  <%# content_tag :div, class: "form-group" do -%>
+  <%# f.label "Category" %><br>
+  <%# f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
 
-<!--   <input type = "hidden" name = "sku" value = "<%# (Faker::Code.ean).to_i %>"> -->
+
+  <%# end -%>
+
+
 
   <%= content_tag :div, class: "form-group" do -%>
     <% if @user.id.nil? %>
