@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :users #do
-    resources :addresses
+  resources :addresses 
   # end
 
 

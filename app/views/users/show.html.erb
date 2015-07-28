@@ -26,7 +26,7 @@
 
   <li><%= link_to "Edit #{@user.full_name}/'s information' ", edit_user_path(@user) %></li>
   <li><%= link_to "Delete #{@user.full_name}", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
-    <li><%= link_to "View Saved Addresses" %></li>
+    <li><%= link_to "View Saved Addresses", addresses_path({user_id: @user.id}) %></li>
     <li><%= link_to "View Unplaced Order (Cart)" %></li>
 
   <li><%= link_to "Edit User", edit_user_path(@user) %></li>

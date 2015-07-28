@@ -1,7 +1,16 @@
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.all
+    if params[:user_id]
+      if !User.where(:id => params[:user_id]).empty?
+        @addresses = User.find(params[:user_id]).addresses
+      else
+        flash[:error] = "No user with this ID found." 
+        redirect_to addresses_path
+      end
+    else
+      @addresses = Address.all
+    end
   end
 
   def new
