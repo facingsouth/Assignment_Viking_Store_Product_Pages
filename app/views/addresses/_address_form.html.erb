@@ -88,7 +88,8 @@
 
     <div class = "col-sm-8">
       <!-- Needs to be a dropdown of 50 states -->
-      <%=f.text_field :state, class: "form-control" %>
+       <%= f.collection_select(:state, State.all, :id, :name) %>
+      
     </div>
 
   </div><br>

@@ -1,5 +1,6 @@
 class AddressesController < ApplicationController
 
+
   def index
     if params[:user_id]
       if User.exists?(params[:user_id])
@@ -17,10 +18,13 @@ class AddressesController < ApplicationController
   def new
     @address = Address.new
     @user = User.find(params[:user_id])
+
   end
 
   def create
+
     @address = Address.new(white_listed_address_params)
+    @user=User.find(@address.user_id)
     if @address.save
       flash[:success] = "New address created."
       redirect_to addresses_path
@@ -67,7 +71,7 @@ class AddressesController < ApplicationController
   def white_listed_address_params
     params.require(:address).permit(:street_address, 
                                     :secondary_address, 
-                                    :zipcode, 
+                                    :zip_code, 
                                     :city_id, 
                                     :state_id, 
                                     :user_id)
