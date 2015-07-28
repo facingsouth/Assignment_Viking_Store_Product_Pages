@@ -51,7 +51,7 @@
             <% else %>
               <td> <%= user.orders_checked_out.first.checkout_date.to_date %> </td>
             <% end -%>
-            
+
             <td> <%= link_to 'Show', user %> </td>
             <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
             <td> <%= link_to 'Delete', user_path(user), method: :delete, class: "alert-danger", 
