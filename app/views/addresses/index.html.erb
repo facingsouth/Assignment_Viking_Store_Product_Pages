@@ -1,17 +1,28 @@
 <div class="row text-center">
-  <h3>Viking Store Addresses</h3>
 
-  <%= link_to new_address_path do %>
-    <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
-          content_tag(:strong, 'Create New Address')
-    end %>
-  <% end %>
+  <% if @user %>
+    <h3>
+      <%= @user.full_name %>'s Addresses
+    </h3>
+
+    <br>
+    <%= link_to new_address_path do %>
+      <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do %>
+          <%= content_tag(:strong, "Create a New Address for #{@user.full_name}") %>
+      <% end %>
+    <% end %>
+
+  <% else %>
+    <h3>Viking Store Addresses</h3>
+  <% end -%>
 
 </div>
 <hr>
-<p>
-  Addresses can only be created in User profile. <a href="/users">See all users here.</a>
-</p>
+<% unless @user %>
+  <h4>
+    Addresses can only be created in User profile. <a href="/users">See all users here.</a>
+  </h4>
+<% end -%>
 <div class="row scrollable">
   <table class="table table-bordered">
     <tr>
