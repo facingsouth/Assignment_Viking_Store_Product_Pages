@@ -31,14 +31,27 @@
             <td> <%= user.id %> </td>
             <td> <%= user.full_name %> </td>
             <td> <%= user.created_at.to_date %> </td>
-            <td> <%= user.cities.first.name %> </td>
-            <td> <%= user.states.first.name %> </td>
+
+            <% if user.cities.empty? %>
+              <td> No city </td>
+            <% else %>
+              <td> <%= user.cities.first.name %> </td>
+            <% end -%>
+
+            <% if user.states.empty? %>
+              <td> No state </td>
+            <% else %>
+              <td> <%= user.states.first.name %> </td>
+            <% end -%>
+
             <td> <%= user.orders_checked_out.count %> </td>
+
             <% if user.orders_checked_out.empty? %>
               <td> No orders </td>
             <% else %>
               <td> <%= user.orders_checked_out.first.checkout_date.to_date %> </td>
             <% end -%>
+            
             <td> <%= link_to 'Show', user %> </td>
             <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
             <td> <%= link_to 'Delete', user_path(user), method: :delete, class: "alert-danger", 

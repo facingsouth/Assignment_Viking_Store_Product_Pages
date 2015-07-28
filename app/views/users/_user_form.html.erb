@@ -22,8 +22,16 @@
   <%= content_tag :div, class: "form-group" do -%>
     <%= f.label "Email" %>
     <%= f.text_field :email, class: "form-control" %>
-  <% end -%>
+  <% end %>
 
+  <%# content_tag :div, class: "form-group" do -%>
+  <%# f.label "Category" %><br>
+  <%# f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
+
+
+  <%# end -%>
+
+<<<<<<< HEAD
   <%= content_tag :div, class: "form-group" do -%>
     <%= f.label "billing_id" %><br>
     <%= f.text_field :billing_id, class: "form-control" %> 
@@ -33,8 +41,9 @@
     <%= f.label "shipping_id" %><br>
     <%= f.text_field :shipping_id, class: "form-control" %>
   <% end -%>
+=======
+>>>>>>> 436d42c5dc57afc5bd95e52ace82f796c02319c4
 
-<!--   <input type = "hidden" name = "sku" value = "<%# (Faker::Code.ean).to_i %>"> -->
 
   <%= content_tag :div, class: "form-group" do -%>
     <% if @user.id.nil? %>

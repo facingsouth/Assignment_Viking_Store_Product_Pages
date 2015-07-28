@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  root "dashboard#index" 
   get "/dashboard" => "analytics#dashboard"
 
   get "/admin" => "admins#portal"
@@ -7,8 +8,13 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :users #do
+<<<<<<< HEAD
     resources :addresses
   # end
+=======
+  resources :addresses
+  #end
+>>>>>>> 436d42c5dc57afc5bd95e52ace82f796c02319c4
 
 
   # The priority is based upon order of creation: first created -> highest priority.
