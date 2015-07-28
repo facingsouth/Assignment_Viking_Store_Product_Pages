@@ -3,7 +3,6 @@ class City < ActiveRecord::Base
 
 
   def self.check_city_name(name)
-    City.select("id").where("city.name=?", name).first
-
+    self.select("id").where("name = ?", name).first
   end
 end

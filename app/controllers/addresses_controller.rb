@@ -22,9 +22,9 @@ class AddressesController < ApplicationController
   end
 
   def create
-
     @address = Address.new(white_listed_address_params)
-    @user=User.find(@address.user_id)
+    @address.city_id = check_city(params[:address][:city])
+    # @user = User.find(@address.user_id)
     if @address.save
       flash[:success] = "New address created."
       redirect_to addresses_path
@@ -40,7 +40,7 @@ class AddressesController < ApplicationController
 
   def edit
     @address = Address.find(params[:id])
-    @user = User.find(params[:user_id])
+    @user = User.find(@address.user_id)
   end
 
   def update
@@ -76,4 +76,15 @@ class AddressesController < ApplicationController
                                     :state_id, 
                                     :user_id)
   end
+
+  def check_city(name)
+    city_name = City.check_city_name(name)
+    if city_name
+      city_name.id
+    else
+      new_city = City.create({:name => name})
+      new_city.id
+    end
+  end
+
 end

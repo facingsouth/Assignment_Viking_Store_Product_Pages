@@ -16,6 +16,8 @@
 
   </div><br>
 
+  <input type="hidden" id="user_id" name="address[user_id]" value=<%= @user.id %> />
+
   <div class = "row">
 
     <div class = "col-sm-4">
@@ -56,18 +58,6 @@
 
   </div><br>
 
- <div class = "row">
-
-    <div class = "col-sm-4">
-      <%=f.label :street_address %>
-    </div>
-
-    <div class = "col-sm-8">
-      <%=f.text_field :street_address, class: "form-control" %>
-    </div>
-
-  </div><br>
-
   <div class = "row">
 
     <div class = "col-sm-4">
@@ -75,7 +65,11 @@
     </div>
 
     <div class = "col-sm-8">
-      <%=f.text_field :city, class: "form-control" %>
+      <% if @address.id %>
+        <%=f.text_field :city, value: "#{@address.city.name}",  class: "form-control" %>
+      <% else %>
+        <%=f.text_field :city, class: "form-control" %>
+      <% end -%>
     </div>
 
   </div><br>
@@ -83,12 +77,12 @@
   <div class = "row">
 
     <div class = "col-sm-4">
-      <%=f.label :state %>
+      <%=f.label :state_id %>
     </div>
 
     <div class = "col-sm-8">
       <!-- Needs to be a dropdown of 50 states -->
-       <%= f.collection_select(:state, State.all, :id, :name) %>
+       <%= f.collection_select(:state_id, State.all, :id, :name) %>
       
     </div>
 
