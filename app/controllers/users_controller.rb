@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.destroy
       flash[:success] = "User Deleted"
-      redirect_to index
+      redirect_to users_path
     else
       flash[:error] = @user.errors.full_messages.first
       render :edit
@@ -54,5 +54,5 @@ class UsersController < ApplicationController
   def whitelisted_params
     params.require(:user).permit(:first_name, :last_name, :email)
   end
-  
+
 end

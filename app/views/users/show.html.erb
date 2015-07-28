@@ -1,25 +1,21 @@
-<<<<<<< HEAD
-<h2><%= @user.full_name %></h2>
+<h1>User <%= @user.id %>: <%= @user.full_name %></h1>
+<h2>Demographic information</h1>
 <ul>
-  <li>User ID: <%= @user.id %></li>
-  <li>User email: <%= @user.email %></li>
-  <li>
-    <%= link_to address_path(@user.billing_id) do %>
-      Billing address id: <%= @user.billing_id %>
-    <% end %>
-  </li>
-  <li>
-    <%= link_to address_path(@user.shipping_id) do %>
-      Shipping address id: <%= @user.shipping_id %>
-    <% end %>
-  </li>
-  <li>
-    <% if @user.orders_in_cart.empty? %>
-      Nothing in cart.
-    <% else %>
-      <%= link_to "Cart", "#"%>
-    <% end %>
-  </li>
+  <li>First name: <%= @user.first_name %></li>
+  <li>Last name: <%= @user.last_name %></li>
+  <li>Email: <%= @user.email %></li>
+
+
+  <li>Default Billing Address: <br> <%= @user.default_billing_address_id.street_address %></li>
+  <li>Default Shipping Address: <br> <%= @user.default_shipping_address_id.street_address %></li>
+  <li><%= link_to "Edit #{@user.full_name}/'s information' ", edit_user_path(@user) %></li>
+  <li><%= link_to "Delete #{@user.full_name}", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
+    <li><%= link_to "View Saved Addresses" %></li>
+    <li><%= link_to "View Unplaced Order (Cart)" %></li>
+
+  <li><%= link_to "Edit User", edit_user_path(@user) %></li>
+  <li><%= link_to "Delete User", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
+
   <li>
     <p>Credit Cards</p>
     <table class="table-bordered">
@@ -41,25 +37,57 @@
       <% end %>
     </table>
   </li>
-  
 
-  
-  <li><%= link_to "edit", edit_user_path(@user) %></li>
-  <li><%= link_to "delete", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
-=======
-<h1>User <%= @user.id %>: <%= @user.full_name %></h1>
-<h2>Demographic information</h1>
-<ul>
-  <li>First name: <%= @user.first_name %></li>
-  <li>Last name: <%= @user.last_name %></li>
-  <li>Email: <%= @user.email %></li>
+<h2>Admin Actions for <%= @user.full_name %> </h2>
+
+<%# link_to new_user_path do %>
+  <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+              content_tag(:strong, 'Create Order')
+        end %>
+<%# end %>
+<br><br><br>
+<%# link_to new_user_path do %>
+<%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
+            content_tag(:strong, 'Create Address')
+      end %>
+<%# end %>
+
+<div class = "row">
+  <div class = "col-sm-12 text-center">
+    <h2>Order History</h2>
+
+    <table class="table table-striped table-hover">
+        <tr>
+          <th>ID</th>
+          <th>Order Date</th>
+          <th>Value</th>
+          <th>Status</th>
+          <th>Show</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <% @user.orders.each do |order| %>
+          <tr>
+            <td> <%= order.id %> </td>
+            <td> <%= order.created_at %> </td>
+            <td> <%= number_to_currency(order.value) %> </td>
+
+            <% if order.checkout_date %>
+              <td> Placed </td>
+            <% else %>
+              <td style="color:red"> Unplaced </td>
+            <% end -%>
+
+            <td> <%= link_to 'Show' %> </td>
+            <td> <%= link_to 'Edit' %> </td>
+            <td> <%= link_to 'Delete', method: :delete, class: "alert-danger", 
+                    data: { confirm: "Are you sure?" } %> </td>
+          </tr>
+        <% end %>
+
+    </table>
+  </div>
+</div>
 
 
-  <li>Default Billing Address: <br> <%= @user.default_billing_address_id.street_address %></li>
-  <li>Default Shipping Address: <br> <%= @user.default_shipping_address_id.street_address %></li>
-  <li><%= link_to "Edit #{@user.full_name}/'s information' ", edit_user_path(@user) %></li>
-  <li><%= link_to "Delete #{@user.full_name}", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
-    <li><%= link_to "View Saved Addresses" %></li>
-    <li><%= link_to "View Unplaced Order (Cart)" %></li>
->>>>>>> 436d42c5dc57afc5bd95e52ace82f796c02319c4
-</ul>
+

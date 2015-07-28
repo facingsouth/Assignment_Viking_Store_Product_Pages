@@ -13,6 +13,12 @@ class Order < ActiveRecord::Base
               foreign_key: :billing_id
 
 
+  def value
+    self.order_contents.reduce(0) do |sum, row|
+      sum += Product.find(row.product_id).price * row.quantity
+    end
+  end
+
   def self.order_count(timeframe = 100000000000000)
 
     if timeframe.nil?
