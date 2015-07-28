@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
             :length => {:in => (1..64), :message => "Must be between 1 and 64 characters."}
   validates :email, :format => {:with => /@/}
 
-            
+# ----------------- Associations -------------------
 
 
   has_many :addresses, dependent: :destroy
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   has_many :states, through: :addresses
 
 
-  # 1. Overall Platform
+  # ------------------------ Methods -----------------
 
   # Last 7 Days
 

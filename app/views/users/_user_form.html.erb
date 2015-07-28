@@ -24,12 +24,25 @@
     <%= f.text_field :email, class: "form-control" %>
   <% end %>
 
-  <%= content_tag :div, class: "form-group" do -%>
-  <%= f.label "Addresses" %><br>
+   <%= content_tag :div, class: "form-group" do -%>
+  <%= f.label "Default shipping address" %><br>
     <%if @user.addresses.first%>
-    <%= f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
+      <%= f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
     <%else%>
-    <%= f.collection_select(:addresses, @user.addresses, :id, :street_address, {},{:disabled => "disabled"} ) %>
+      <%= f.collection_select(:addresses, @user.addresses, :id, :street_address, {},{:disabled => "disabled"} ) %>
+    <% end -%>
+
+  <% end -%>
+
+  <%= content_tag :div, class: "form-group" do -%>
+  <%= f.label "Default billing address" %><br>
+    <%if @user.addresses.first%>
+      <%= f.collection_select(:addresses, @user.addresses, :id, :street_address) %>
+
+      <br><br>
+      <%= link_to "View saved addresses" %>
+    <%else%>
+      <%= f.collection_select(:addresses, @user.addresses, :id, :street_address, {},{:disabled => "disabled"} ) %>
     <% end -%>
 
   <% end -%>
@@ -46,3 +59,11 @@
   <% end -%>
 
 <% end -%>
+
+<% unless @user.id.nil? %>
+    <%= link_to user_path(@user), method: :delete, class: "alert-danger", data: { confirm: "Are you sure?" } do %>
+      <%= button_tag(type: 'button', class: 'btn btn-lg btn-alert') do
+            content_tag(:strong, 'Delete User')
+      end %>
+    <% end %>
+  <% end -%>

@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update
+    if @user.update(whitelisted_params)
       flash[:success] = "User Updated"
       redirect_to @user
     else
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :default_shipping_address_id, :default_billing_address_id)
   end
 
 end

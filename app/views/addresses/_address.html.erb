@@ -5,9 +5,9 @@
   <td><%= address.zip_code %></td>
   <td><%= address.city.name %></td>
   <td><%= address.state.name %></td>
-  <td><%= address.user.full_name %></td>
+  <td><%= link_to "#{address.user.full_name}", user_path(address.user.id) %></td>
 
-  <td><%= link_to "show", address_path(address) %></td>
-  <td><%= link_to "edit", edit_address_path(address) %></td>
-  <td><%= link_to "delete", address_path(address), method: :delete, data: {confirm: "Really really delete this address?"} %></td>
+  <td><%= link_to "Show", address_path(address) %></td>
+  <td><%= link_to "Edit", edit_address_path(address) %></td>
+  <td><%= link_to "Delete", address_path(address), method: :delete,class: "alert-danger", data: {confirm: "Really really delete this address?"} %></td>
 </tr>
