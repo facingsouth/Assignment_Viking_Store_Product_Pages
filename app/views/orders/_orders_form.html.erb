@@ -1,4 +1,4 @@
-<%= form_for @order do |f| %>
+<%= form_for order do |f| %>
 
   <div class = "row">
     <div class = "col-sm-4 col-sm-push-4">
@@ -52,14 +52,14 @@
 
     <div class = "col-sm-8">
       <p>
-        <%= @order.checkout_date ? @order.checkout_date : "N/A" %>
+        <%= order.checkout_date ? order.checkout_date : "N/A" %>
       </p>
     </div>
   </div><br>
 
   <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
   <br>
-  <% if @order.persisted? %>
+  <% if order.persisted? %>
     <%= f.label :status, "Placed", class: "placed-status"%>
     <%= f.radio_button(:status, true, checked: order_status("Placed"))%>
 
@@ -106,7 +106,7 @@
   </div><br>
 
   <%= content_tag :div, class: "form-group" do -%>
-    <% if @order.id %>
+    <% if order.id %>
       <%= f.submit "Update Order Information", class: 'btn btn-lg btn-success' %>
     <% else %>
       <%= f.submit "Create Order in Shopping Cart", class: 'btn btn-lg btn-success' %>
@@ -116,7 +116,7 @@
 <% end %>
 
 
-<% if @order.id %>
+<% if order.id %>
   <%= link_to user_path(@user), method: :delete, class: "alert-danger", data: { confirm: "Are you sure?" } do %>
     <%= button_tag(type: 'button', class: 'btn btn-lg btn-alert-danger') do %>
       <%= content_tag(:strong, 'Delete Order') %>

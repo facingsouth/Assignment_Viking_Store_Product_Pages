@@ -57,12 +57,12 @@ class OrdersController < ApplicationController
       else
         @order.checkout_date=nil
       end
-     
+
 
     if @order.update(whitelisted_order_params)
 
       flash[:success] = "order successfully modified."
-      redirect_to order_path
+      redirect_to edit_order_contents_path
     else
       flash.now[:error] = @order.errors.full_messages.first
       render :edit

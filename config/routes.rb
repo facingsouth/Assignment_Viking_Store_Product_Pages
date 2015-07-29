@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "users#index" 
+  root "users#index"
   get "/dashboard" => "analytics#dashboard"
 
   get "/admin" => "admins#portal"
@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :users
-  resources :addresses 
+  resources :addresses
   resources :orders
+  resources :order_contents
 
 
 

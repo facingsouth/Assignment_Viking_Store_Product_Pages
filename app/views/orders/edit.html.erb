@@ -1,3 +1,5 @@
 <h3>Edit order for <%= @user.full_name %>!</h3>
 
-<%= render partial: 'orders_form' %>
+<%= render partial: 'orders_form', locals: { order: @order} %>
+
+<%= render partial: 'order_contents_form', locals: { order_contents: @order_contents}%>

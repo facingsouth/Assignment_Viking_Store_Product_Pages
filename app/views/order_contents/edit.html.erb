@@ -1,0 +1,36 @@
+<% form_for @order do |f| %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Quantitiy</th>
+    <th>Price</th>
+    <th>Total Price</th>
+    <th>Remove</th>
+  </tr>
+
+  <%= f.collection_check_boxes(:order_contents, @order_contents, :id, :name, {}) do |b| %>
+  <tr><%=b.label(:class => "col-md-12"){b.check_box + b.text} %> </tr>
+  <% end %>
+
+
+      <tr>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total price</th>
+      </tr>
+
+
+      <% @order.order_contents.each do |row| %>
+         <tr>
+           <td> <%= row.product_id %> </td>
+           <td> <%= row.quantity %> </td>
+           <td> <%= number_to_currency(row.product.price) %> </td>
+           <td> <%= number_to_currency(row.value) %> </td>
+         </tr>
+      <%end%>
+
+
+
+  <%= f.submit "Update Order Contents" %>
+</table>
