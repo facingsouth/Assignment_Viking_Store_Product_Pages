@@ -24,23 +24,21 @@
     <% end -%>
   </li>
 
-  <li><%= link_to "Edit #{@user.full_name}/'s information' ", edit_user_path(@user) %></li>
-  <li><%= link_to "Delete #{@user.full_name}", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
-    <li><%= link_to "View Saved Addresses", addresses_path({user_id: @user.id}) %></li>
-    <li><%= link_to "View Unplaced Order (Cart)" %></li>
+  <h3><%= link_to "Edit #{@user.full_name}/'s information ", edit_user_path(@user) %></h3>
+  <h3><%= link_to "Delete #{@user.full_name}", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></h3>
+    <h3><%= link_to "View Saved Addresses", addresses_path({user_id: @user.id}) %></h3>
+    <h3><%= link_to "View Unplaced Order (Cart)", orders_path({user_id: @user.id}) %></h3>
 
-  <li><%= link_to "Edit User", edit_user_path(@user) %></li>
-  <li><%= link_to "Delete User", user_path(@user), method: :delete,  data: {confirm: "Really really delete this user?"} %></li>
 
-  <li>
-    <p>Credit Cards</p>
-    <table class="table-bordered">
+
+    <h3>Credit Cards</h3>
+    <table class="table table-bordered">
       <tr>
-        <th>nickname</th>
-        <th>card_number</th>
-        <th>exp_month</th>
-        <th>exp_year</th>
-        <th>brand</th>
+        <th>Nickname</th>
+        <th>Card_number</th>
+        <th>Exp_month</th>
+        <th>Exp_year</th>
+        <th>Brand</th>
       </tr>
       <% @user.credit_cards.each do |card| %>
         <tr>
@@ -52,7 +50,6 @@
         </tr>
       <% end %>
     </table>
-  </li>
 
 <h2>Admin Actions for <%= @user.full_name %> </h2>
 

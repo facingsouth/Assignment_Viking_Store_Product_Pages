@@ -18,18 +18,19 @@ class Order < ActiveRecord::Base
       sum += Product.find(row.product_id).price * row.quantity
     end
   end
+
   def status
-    Order.checkout_date ? "Placed" : "Unplaced"
+    self.checkout_date ? "Placed" : "Unplaced"
   end
 
   def street
     Address.find(self.shipping_id).street_address
   end
   def city
-    Address.find(self.shipping_id).city
+    Address.find(self.shipping_id).city.name
   end
   def state
-    Address.find(self.shipping_id).state
+    Address.find(self.shipping_id).state.name
   end
 
   def self.order_count(timeframe = 100000000000000)

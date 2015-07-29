@@ -1,10 +1,21 @@
-<%= form_for @address do |f| %>
+<%= form_for @order do |f| %>
 
   <div class = "row">
+    <div class = "col-sm-4 col-sm-push-4">
+      <h3>Logistical information</h3>
+    </div>
+  </div>
 
-    <div class = "col-sm-4">
+  <div class = "row">
+    <div class = "col-sm-6">
+      <h4>Basic information</h4>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-sm-3">
       <p>
-        <strong>Owner ID: </strong>
+        <strong>Customer ID: </strong>
       </p>
     </div>
 
@@ -19,10 +30,9 @@
   <input type="hidden" id="user_id" name="address[user_id]" value=<%= @user.id %> />
 
   <div class = "row">
-
-    <div class = "col-sm-4">
+    <div class = "col-sm-3">
       <p>
-        <strong>Owner Name: </strong>
+        <strong>Customer: </strong>
       </p>
     </div>
 
@@ -31,90 +41,75 @@
         <%= link_to "#{@user.full_name} (click to view)", @user %>
       </p>
     </div>
-
   </div><br>
 
   <div class = "row">
-
-    <div class = "col-sm-4">
-      <%=f.label :street_address %>
+    <div class = "col-sm-3">
+      <p>
+        <strong>Date Placed: </strong>
+      </p>
     </div>
 
     <div class = "col-sm-8">
-      <%=f.text_field :street_address, class: "form-control" %>
+      <p>
+        <%= @order.checkout_date ? @order.checkout_date : "N/A" %>
+      </p>
     </div>
-
   </div><br>
+
+  <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+
 
   <div class = "row">
 
-    <div class = "col-sm-4">
-      <%=f.label :secondary_address %>
+    <div class = "col-sm-12">
+      <%=f.label :shipping_address %>
     </div>
 
     <div class = "col-sm-8">
-      <%=f.text_field :secondary_address, class: "form-control" %>
-    </div>
-
-  </div><br>
-
-  <div class = "row">
-
-    <div class = "col-sm-4">
-      <%=f.label :city %>
-    </div>
-
-    <div class = "col-sm-8">
-      <% if @address.id %>
-        <%=f.text_field :city, value: "#{@address.city.name}",  class: "form-control" %>
-      <% else %>
-        <%=f.text_field :city, class: "form-control" %>
-      <% end -%>
+      <%= f.collection_select(:shipping_address, @user.addresses, :id, :street_address) %>
     </div>
 
   </div><br>
 
   <div class = "row">
 
-    <div class = "col-sm-4">
-      <%=f.label :state_id %>
+    <div class = "col-sm-12">
+      <%=f.label :billing_address %>
     </div>
 
     <div class = "col-sm-8">
-      <!-- Needs to be a dropdown of 50 states -->
-       <%= f.collection_select(:state_id, State.all, :id, :name) %>
-      
+      <%= f.collection_select(:billing_address, @user.addresses, :id, :street_address) %>
     </div>
 
   </div><br>
 
   <div class = "row">
 
-    <div class = "col-sm-4">
-      <%=f.label :zip_code %>
+    <div class = "col-sm-12">
+      <%=f.label :credit_card_id %>
     </div>
 
     <div class = "col-sm-8">
-      <%=f.text_field :zip_code, class: "form-control" %>
+      <%= f.collection_select(:bill, @user.addresses, :id, :street_address) %>
     </div>
 
   </div><br>
 
   <%= content_tag :div, class: "form-group" do -%>
-    <% if @address.id.nil? %>
-      <%= f.submit "Create address", class: 'btn btn-lg btn-success' %>
+    <% if @order.id %>
+      <%= f.submit "Update Order Information", class: 'btn btn-lg btn-success' %>
     <% else %>
-      <%= f.submit "Update address", class: 'btn btn-lg btn-success' %>
+      <%= f.submit "Create Order in Shopping Cart", class: 'btn btn-lg btn-success' %>
     <% end %>
-
   <% end -%>
 <% end %>
 
 
-<% unless @address.id.nil? %>
+<% if @order.id %>
   <%= link_to user_path(@user), method: :delete, class: "alert-danger", data: { confirm: "Are you sure?" } do %>
     <%= button_tag(type: 'button', class: 'btn btn-lg btn-alert-danger') do %>
-      <%= content_tag(:strong, 'Delete User') %>
+      <%= content_tag(:strong, 'Delete Order') %>
     <% end %>
   <% end %>
 <% end -%>

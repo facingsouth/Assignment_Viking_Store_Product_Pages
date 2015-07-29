@@ -44,7 +44,7 @@
               <td> <%= user.states.first.name %> </td>
             <% end -%>
 
-            <td> <%= user.orders_checked_out.count %> </td>
+            <td> <%= link_to user.orders_checked_out.count, orders_path({:user_id => user.id}) %> </td>
 
             <% if user.orders_checked_out.empty? %>
               <td> No orders </td>

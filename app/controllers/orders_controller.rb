@@ -4,35 +4,32 @@ class OrdersController < ApplicationController
   def index
     if params[:user_id]
       if User.exists?(params[:user_id])
-        @orders = User.find(params[:user_id]).order
+        @orders = User.find(params[:user_id]).orders.limit(100)
         @user = User.find(params[:user_id])
       else
         flash[:error] = "No user with this ID found." 
         redirect_to orders_path
       end
     else
-      @orders = Order.all
+      @orders = Order.all.limit(100)
     end
   end
 
-  # def new
-  #   @address = Address.new
-  #   @user = User.find(params[:user_id])
+  def new
+    @order = Order.new
+    @user = User.find(params[:user_id])
+  end
 
-  # end
-
-  # def create
-  #   @address = Address.new(white_listed_address_params)
-  #   @address.city_id = check_city(params[:address][:city])
-  #   # @user = User.find(@address.user_id)
-  #   if @address.save
-  #     flash[:success] = "New address created."
-  #     redirect_to order_path
-  #   else
-  #     flash.now[:error] = @address.errors.full_messages.first
-  #     render :new
-  #   end
-  # end
+  def create
+    @order = Order.new(whitelisted_order_params)
+    if @order.save
+      flash[:success] = "New order created."
+      redirect_to orders_path
+    else
+      flash.now[:error] = @order.errors.full_messages.first
+      render :new
+    end
+  end
 
   # def show
   #   @address = Address.find(params[:id])
@@ -70,12 +67,10 @@ class OrdersController < ApplicationController
 
   private
 
-  def white_listed_address_params
-    params.require(:address).permit(:street_address, 
-                                    :secondary_address, 
-                                    :zip_code, 
-                                    :city_id, 
-                                    :state_id, 
-                                    :user_id)
+  def whitelisted_order_params
+    params.require(:order).permit(:checkout_date, 
+                                    :user_id, 
+                                    :shipping_id, 
+                                    :billing_id )
   end
 end
