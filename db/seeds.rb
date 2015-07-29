@@ -162,6 +162,7 @@ def generate_order
     o[:shipping_id]   = random_user_address(user.id)
     o[:billing_id]    = random_user_address(user.id)
 
+
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
     if has_cart?(user.id)
@@ -193,7 +194,13 @@ def generate_credit_cards_for_checked_out_orders
     # for when card numbers collide
     card.save if CreditCard.
                  where(:card_number => card.card_number).empty?
+                
+    Order.where("user_id=? AND checkout_date IS NOT NULL",user.user_id).each do |order|
+      order.credit_card_id = card.id
+      order.save 
+    end
   end
+
 end
 
 

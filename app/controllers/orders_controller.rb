@@ -31,9 +31,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def show
-  #   @address = Address.find(params[:id])
-  # end
+  def show
+    @order = Order.find(params[:id])
+    @user=User.find(@order.user_id)
+  end
 
   # def edit
   #   @address = Address.find(params[:id])

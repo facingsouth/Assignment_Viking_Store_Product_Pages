@@ -27,7 +27,7 @@
 
   </div><br>
 
-  <input type="hidden" id="user_id" name="address[user_id]" value=<%= @user.id %> />
+  <input type="hidden" id="user_id" name="order[user_id]" value=<%= @user.id %> />
 
   <div class = "row">
     <div class = "col-sm-3">
@@ -91,7 +91,7 @@
     </div>
 
     <div class = "col-sm-8">
-      <%= f.collection_select(:bill, @user.addresses, :id, :street_address) %>
+      <%= f.collection_select(:credit_card_id, @user.credit_cards, :id, :card_number) %>
     </div>
 
   </div><br>

@@ -1,12 +1,189 @@
-<ul>
-  <li>Street Address: <%= @address.street_address %></li>
-  <li>Secondary Address: <%= @address.secondary_address %></li>
-  <li>Zip Code: <%= @address.zip_code %></li>
-  <li>City ID: <%= @address.city_id %></li>
-  <li>State ID: <%= @address.state_id %></li>
-  <li>User ID: <%= @address.user_id %></li>
-  
-  
-  <li><%= link_to "edit", edit_address_path(@address) %></li>
-  <li><%= link_to "delete", address_path(@address), method: :delete,  data: {confirm: "Really really delete this address?"} %></li>
-</ul>
+<div class = "row">
+    <div class = "col-sm-4 col-sm-push-4">
+      <h3>Logistical information</h3>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-sm-6">
+      <h4>Basic information</h4>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-sm-3">
+      <p>
+        <strong>Customer ID: </strong>
+      </p>
+    </div>
+
+    <div class = "col-sm-8">
+      <p>
+        <%= @order.user_id %>
+      </p>
+    </div>
+
+  </div><br>
+
+
+
+  <div class = "row">
+    <div class = "col-sm-3">
+      <p>
+        <strong>Customer: </strong>
+      </p>
+    </div>
+
+    <div class = "col-sm-8">
+      <p>
+        <%= link_to "#{@user.full_name} (click to view)", @user %>
+      </p>
+    </div>
+  </div><br>
+
+  <div class = "row">
+    <div class = "col-sm-3">
+      <p>
+        <strong>Date Placed: </strong>
+      </p>
+    </div>
+     <div class = "col-sm-8">
+      <p>
+        <%= @order.checkout_date ? @order.checkout_date : "N/A" %>
+      </p>
+    </div>
+  </div><br>
+
+  <div class = "row">
+    <div class = "col-sm-3">
+      <p>
+        <strong>Products amount</strong>
+      </p>
+    </div>
+     <div class = "col-sm-8">
+      <p>
+        <%= @order.products.count %>
+      </p>
+    </div>
+  </div><br>
+
+    <div class = "row">
+    <div class = "col-sm-3">
+      <p>
+        <strong>Order value</strong>
+      </p>
+    </div>
+     <div class = "col-sm-8">
+      <p>
+        <%= number_to_currency @order.value%>
+      </p>
+    </div>
+  </div><br>
+
+  <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+
+    <div class = "row">
+    <div class = "col-sm-12">
+      <h3>
+        <strong>Order status</strong>
+      </h3>
+    </div>
+     <div class = "col-sm-4">
+        <h2 class = <%= @order.status == "Placed" ? "alert-success" : "alert-danger" %> ><%= @order.status %></h2>
+      
+    </div>
+  </div><br>
+      <div class = "row">
+    <div class = "col-sm-12">
+      <h3>
+        <strong>Shipping Address</strong>
+      </h3>
+    </div>
+     <div class = "col-sm-8">
+      <p>
+        <strong>Street</strong> <%=@order.street%>
+      </p>
+      <p>
+        <strong>City</strong> <%=@order.city%>
+      </p>
+      <p>
+        <strong>State</strong> <%=@order.state%>
+      </p>
+    </div>
+  </div><br>
+
+  <div class = "row">
+    <div class = "col-sm-12">
+      <h3>
+        <strong>Billing Address</strong>
+      </h3>
+    </div>
+     <div class = "col-sm-8">
+      <p>
+        <strong>Street</strong> <%=@order.bill_street%>
+      </p>
+      <p>
+        <strong>City</strong> <%=@order.bill_city%>
+      </p>
+      <p>
+        <strong>State</strong> <%=@order.bill_state%>
+      </p>
+    </div>
+  </div><br>
+  <div class = "row">
+    <div class = "col-sm-12">
+      <h3>
+        <strong>Billing Card</strong>
+      </h3>
+    </div>
+     <div class = "col-sm-8">
+      <p>
+
+        <strong>Last 4 digits</strong> <%=@order.credit_card_id ? @order.bill_card : "No credit card yet, because order hasn't been placed." %>
+      </p>
+   
+    </div>
+  </div><br>
+
+  <li><%= link_to "Edit order", edit_order_path(@order) %></li>
+  <li><%= link_to "Delete order", order_path(@order), method: :delete,  data: {confirm: "Really really delete this order?"} %></li>
+
+
+  <div class = "row">
+  <div class = "col-sm-12 text-center">
+    <h2>Order Contents</h2>
+
+    <table class="table table-striped table-hover">
+        <tr>
+          <th>Product ID</th>
+          <th>Product name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total price</th>
+        </tr>
+        <% @order.products.each do |product| %>
+          <tr>
+            <td> <%= product.id %> </td>
+            <td> <%= product.name %> </td>
+            <td> <%= @order.p_value(product.id)%> </td>
+
+            <td> <%= number_to_currency(product.price) %> </td>
+            <td> <%= number_to_currency(product.price * product.quantity) %> </td>
+
+        </tr>
+<%end%>
+
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

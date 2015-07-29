@@ -19,6 +19,14 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def p_value(id)
+    self.order_contents.where("product_id=?", id).quantity*Product.find(id).price
+  end
+
+  def bill_card
+    CreditCard.find(self.credit_card_id).card_number
+  end
+
   def status
     self.checkout_date ? "Placed" : "Unplaced"
   end
@@ -31,6 +39,16 @@ class Order < ActiveRecord::Base
   end
   def state
     Address.find(self.shipping_id).state.name
+  end
+
+  def bill_street
+    Address.find(self.billing_id).street_address
+  end
+  def bill_city
+    Address.find(self.billing_id).city.name
+  end
+  def bill_state
+    Address.find(self.billing_id).state.name
   end
 
   def self.order_count(timeframe = 100000000000000)
