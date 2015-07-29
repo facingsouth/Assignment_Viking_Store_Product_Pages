@@ -145,10 +145,6 @@
     </div>
   </div><br>
 
-  <li><%= link_to "Edit order", edit_order_path(@order) %></li>
-  <li><%= link_to "Delete order", order_path(@order), method: :delete,  data: {confirm: "Really really delete this order?"} %></li>
-
-
   <div class = "row">
   <div class = "col-sm-12 text-center">
     <h2>Order Contents</h2>
@@ -161,21 +157,27 @@
           <th>Price</th>
           <th>Total price</th>
         </tr>
-        <% @order.products.each do |product| %>
-          <tr>
-            <td> <%= product.id %> </td>
-            <td> <%= product.name %> </td>
-            <td> <%= @order.p_value(product.id)%> </td>
+ 
 
-            <td> <%= number_to_currency(product.price) %> </td>
-            <td> <%= number_to_currency(product.price * product.quantity) %> </td>
-
-        </tr>
-<%end%>
+<% @order.order_contents.each do |row| %>
+         <tr>
+           <td> <%= row.product_id %> </td>
+           <td> <%= Product.find(row.product_id).name %> </td>
+           <td> <%= row.quantity %> </td>
+           <% price = Product.find(row.product_id).price %>
+           <td> <%= number_to_currency(price) %> </td>
+           <td> <%= number_to_currency(price * row.quantity) %> </td>
+         </tr>
+       <%end%>
 
     </table>
   </div>
 </div>
+
+
+  <li><%= link_to "Edit order", edit_order_path(@order) %></li>
+  <li><%= link_to "Delete order", order_path(@order), method: :delete,  data: {confirm: "Really really delete this order?"} %></li>
+
 
 
 
