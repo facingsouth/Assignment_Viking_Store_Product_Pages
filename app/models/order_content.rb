@@ -2,6 +2,10 @@ class OrderContent < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
+  def value
+    product.price*quantity
+  end
+
   def self.revenue(timeframe = nil)
     if timeframe.nil?
       OrderContent.select("ROUND(SUM(quantity * products.price), 2) AS total")

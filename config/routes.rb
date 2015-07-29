@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "dashboard#index" 
+  root "users#index" 
   get "/dashboard" => "analytics#dashboard"
 
   get "/admin" => "admins#portal"

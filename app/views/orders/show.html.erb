@@ -150,25 +150,25 @@
     <h2>Order Contents</h2>
 
     <table class="table table-striped table-hover">
-        <tr>
-          <th>Product ID</th>
-          <th>Product name</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Total price</th>
-        </tr>
+      <tr>
+        <th>Product ID</th>
+        <th>Product name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total price</th>
+      </tr>
  
 
-<% @order.order_contents.each do |row| %>
+      <% @order.order_contents.each do |row| %>
          <tr>
            <td> <%= row.product_id %> </td>
-           <td> <%= Product.find(row.product_id).name %> </td>
+           <td> <%= row.product.name %> </td>
            <td> <%= row.quantity %> </td>
-           <% price = Product.find(row.product_id).price %>
+           <% price = row.product.price %>
            <td> <%= number_to_currency(price) %> </td>
-           <td> <%= number_to_currency(price * row.quantity) %> </td>
+           <td> <%= number_to_currency(row.value) %> </td>
          </tr>
-       <%end%>
+      <%end%>
 
     </table>
   </div>

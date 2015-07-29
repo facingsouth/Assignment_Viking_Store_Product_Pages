@@ -19,9 +19,6 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def p_value(id)
-    self.order_contents.where("product_id=?", id).quantity*Product.find(id).price
-  end
 
   def bill_card
     CreditCard.find(self.credit_card_id).card_number

@@ -4,8 +4,8 @@ class OrdersController < ApplicationController
   def index
     if params[:user_id]
       if User.exists?(params[:user_id])
-        @orders = User.find(params[:user_id]).orders.limit(100)
         @user = User.find(params[:user_id])
+        @orders = @user.orders.limit(100)
       else
         flash[:error] = "No user with this ID found." 
         redirect_to orders_path
@@ -22,12 +22,19 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(whitelisted_order_params)
-    if @order.save
-      flash[:success] = "New order created."
-      redirect_to orders_path
+    @user = User.find(params[:order][:user_id])
+    @cart_id=@user.orders.where("status=?", "Unplaced")
+    if @cart_id
+      flash[:error]="Cart already exists, you can only have one cart"
+      redirect_to edit_order_path(@cart_id.first.id)
     else
-      flash.now[:error] = @order.errors.full_messages.first
-      render :new
+        if @order.save
+          flash[:success] = "New order created."
+          redirect_to edit_order_path(@order)
+        else
+          flash.now[:error] = @order.errors.full_messages.first
+          render :new
+        end
     end
   end
 
@@ -36,11 +43,11 @@ class OrdersController < ApplicationController
     @user=User.find(@order.user_id)
   end
 
-  # def edit
-  #   @address = Address.find(params[:id])
+  def edit
+    @address = Address.find(params[:id])
 
-  #   @user = User.find(@address.user_id)
-  # end
+    @user = User.find(@address.user_id)
+  end
 
   # def update
   #   @address = Address.find(params[:id])
