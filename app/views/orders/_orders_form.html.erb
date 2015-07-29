@@ -61,10 +61,8 @@
 
   <% if @order.persisted? %>
     <%= f.label :status%>
-    <%= f.radio_button(:status, "Placed",
-     checked:order_status)%>
-    <%= f.radio_button(:status, "Unplaced",
-        checked:order_status) %>
+    <%= f.radio_button(:status, "Placed", order_status)%>
+    <%= f.radio_button(:status, "Unplaced", order_status) %>
    <% end %>
 
   <div class = "row">
