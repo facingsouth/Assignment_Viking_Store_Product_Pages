@@ -44,9 +44,8 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @address = Address.find(params[:id])
-
-    @user = User.find(@address.user_id)
+    @order = Order.find(params[:id])
+    @user = User.find(@order.user_id)
   end
 
   # def update
