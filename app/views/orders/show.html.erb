@@ -164,8 +164,7 @@
            <td> <%= row.product_id %> </td>
            <td> <%= row.product.name %> </td>
            <td> <%= row.quantity %> </td>
-           <% price = row.product.price %>
-           <td> <%= number_to_currency(price) %> </td>
+           <td> <%= number_to_currency(row.product.price) %> </td>
            <td> <%= number_to_currency(row.value) %> </td>
          </tr>
       <%end%>
