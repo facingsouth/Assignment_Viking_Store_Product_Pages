@@ -58,12 +58,16 @@
   </div><br>
 
   <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
-
+  <br>
   <% if @order.persisted? %>
-    <%= f.label :status%>
-    <%= f.radio_button(:status, "Placed", order_status)%>
-    <%= f.radio_button(:status, "Unplaced", order_status) %>
+    <%= f.label :status, "Placed", class: "placed-status"%>
+    <%= f.radio_button(:status, true, checked: order_status("Placed"))%>
+
+    <br>
+     <%= f.label :status, "Unplaced", class: "unplaced-status"%>
+    <%= f.radio_button(:status, false, checked: order_status("Unplaced")) %>
    <% end %>
+   <br>
 
   <div class = "row">
 

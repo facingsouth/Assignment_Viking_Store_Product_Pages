@@ -47,11 +47,20 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = User.find(@order.user_id)
+    @status_changed=params[:status]
   end
 
   def update
     @order = Order.find(params[:id])
+      if params[:order][:status]=="true"
+        @order.checkout_date=Time.now
+      else
+        @order.checkout_date=nil
+      end
+     
+
     if @order.update(whitelisted_order_params)
+
       flash[:success] = "order successfully modified."
       redirect_to order_path
     else
@@ -78,6 +87,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:checkout_date,
                                     :user_id,
                                     :shipping_id,
-                                    :billing_id )
+                                    :billing_id
+                                   )
   end
 end
