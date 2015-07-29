@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150728235422) do
 
   create_table "orders", force: true do |t|
     t.datetime "checkout_date"
-    t.integerhidd        null: false
+    t.integer  "user_id",        null: false
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"
