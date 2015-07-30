@@ -116,13 +116,7 @@
 <% end %>
 
 
-<% if order.id %>
-  <%= link_to user_path(@user), method: :delete, class: "alert-danger", data: { confirm: "Are you sure?" } do %>
-    <%= button_tag(type: 'button', class: 'btn btn-lg btn-alert-danger') do %>
-      <%= content_tag(:strong, 'Delete Order') %>
-    <% end %>
-  <% end %>
-<% end %>
+
 
 
 
