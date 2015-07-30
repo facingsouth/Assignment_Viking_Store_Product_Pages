@@ -8,16 +8,16 @@
     <th>Remove</th>
   </tr>
 
-<form action=<%=edit_order_path(@order)%> method="post">
-  <input type="hidden" name ="_method" value="patch" %>
+<form action=<%=order_path(@order)%> method="post">
+  <input  name ="_method" type="hidden" value="patch" >
   <input name="utf8" type="hidden" value="✓">
   <input name="authenticity_token" type="hidden" value=<%=form_authenticity_token %>>
     <% @order.order_contents.each do |row| %>
        <tr>
          <td> <%= row.product_id %> </td>
          <td> <input type="text"
-              id=[ordercontents][<%= row.product_id %>]
-              value=<%= row.quantity %> </td>
+              name="[order][ordercontents][<%= row.id %>]"
+              value="<%= row.quantity %> "</td>
          <td> <%= number_to_currency(row.product.price) %> </td>
          <td> <%= number_to_currency(row.value) %> </td>
           <td> <%= link_to "Remove", order_content_path(row.id), method: :delete, class: "alert-danger", data: { confirm: "Are you sure you'd like to remove this product in order?" } %></td>
@@ -26,9 +26,10 @@
 
 
 
+
 </table>
 
-      <input type="submit">
+      <input type="submit" value="Submit" >
 </form>
 
 <%= link_to "Delete Order", order_path(@order), method: :delete, data: {confirm: "Are you sure?"} %>

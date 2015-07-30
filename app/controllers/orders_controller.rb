@@ -57,14 +57,17 @@ class OrdersController < ApplicationController
       else
         @order.checkout_date=nil
       end
-
-
     if @order.update(whitelisted_order_params)
-      # @order_contents = OrderContent.
-      flash[:success] = "order successfully modified."
+      params[:order][:ordercontents].each do |k,v|
+        row=OrderContent.find(k)
+        row.quantity = v
+        row.save
+      end
+      flash[:success] = "Order successfully modified."
       redirect_to order_path(@order)
     else
-      flash.now[:error] = @order.errors.full_messages.first
+
+      flash.now[:error] = "Reloading!"#@order.errors.full_messages.first
       render :edit
     end
   end
@@ -87,7 +90,8 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:checkout_date,
                                     :user_id,
                                     :shipping_id,
-                                    :billing_id
+                                    :billing_id,
+                                    :ordercontents=>[]
                                    )
   end
 end
