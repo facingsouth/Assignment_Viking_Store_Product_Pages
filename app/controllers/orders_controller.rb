@@ -27,11 +27,11 @@ class OrdersController < ApplicationController
     if @cart_id.first
       @order = @cart_id.first
       flash[:error]="Cart already exists, you can only have one cart"
-      redirect_to edit_order_path(@order)
+      redirect_to order_path(@order)
     else
         if @order.save
           flash[:success] = "New order created."
-          redirect_to edit_order_path(@order)
+          redirect_to order_path(@order)
         else
           flash.now[:error] = @order.errors.full_messages.first
           render :new
@@ -60,9 +60,9 @@ class OrdersController < ApplicationController
 
 
     if @order.update(whitelisted_order_params)
-
+      # @order_contents = OrderContent.
       flash[:success] = "order successfully modified."
-      redirect_to edit_order_contents_path
+      redirect_to order_path(@order)
     else
       flash.now[:error] = @order.errors.full_messages.first
       render :edit

@@ -1,13 +1,21 @@
 class OrderContentsController < ApplicationController
 
-  def edit
+  # def edit
+  #   @order= Order.find(params[:order_id])
+  #   @order_contents = OrderContents.where("order_id = ?", @order.id)
+  # end
+  def order_list
     @order= Order.find(params[:order_id])
     @order_contents = OrderContents.where("order_id = ?", @order.id)
   end
 
   def update
     @order= Order.find(params[:order_id])
-    @order.update(whitelisted_params) #list of order_contents & Q
+    @order_contents = OrderContents.where("order_id = ?", @order.id)
+    @order.order_contents.each do |oc|
+      oc.update(whitelisted_params)
+  end
+
 
     # [order][order_content_id][product_id: quantity]
 

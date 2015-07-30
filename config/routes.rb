@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :order_contents
 
+  # get '/orders/:id', to: 'orders#order_list'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
