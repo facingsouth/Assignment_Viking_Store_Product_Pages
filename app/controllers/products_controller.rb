@@ -19,8 +19,8 @@ class ProductsController < ApplicationController
     end
 
     if signed_in_user?
-      cart = current_user.orders_in_cart.first
-      cart.update_cart()
+      cart = current_user.shopping_cart #unplaced existing order
+      cart.merge_cart_with_order(session[:cart])
     end
 
   end

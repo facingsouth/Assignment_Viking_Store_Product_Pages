@@ -5,10 +5,10 @@ class Order < ActiveRecord::Base
   has_many :categories, through: :products
 
   belongs_to :user
-  belongs_to :shipping_address, 
+  belongs_to :shipping_address,
               class_name: "Address",
               foreign_key: :shipping_id
-  belongs_to :billing_address, 
+  belongs_to :billing_address,
               class_name: "Address",
               foreign_key: :billing_id
 
@@ -19,17 +19,18 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def update_cart(contents)
+  def merge_cart_with_order(contents) # {"2" => 2 , "10" => 4}
     ocs = self.order_contents
     pids = ocs.pluck(:product_id)
     ids = ocs.pluck(:id)
-    contents.each do |item_id, quantity|
-      if pids.include?(item_id.to_i)
-        oc = ocs.where("order_id = ? AND product_id = ?", self.id, item_id.to_i)
-        oc.quantity += quantity
+    contents.each do |item_id_str, quan|
+      item_id = item_id_str.to_i
+      if pids.include?(item_id)
+        oc = ocs.where("product_id = ?", item_id).first
+        oc.quantity += quan
         oc.save
       else
-        order_contents.create(product_id: item_id.to_i, quantity: quantity)
+        self.order_contents.create(product_id: item_id, quantity: quan)
       end
     end
   end
@@ -102,7 +103,7 @@ class Order < ActiveRecord::Base
 
     # if scope == 'days'
     # t = 7
-    Order.select("ROUND(SUM(quantity * products.price), 2) AS total, 
+    Order.select("ROUND(SUM(quantity * products.price), 2) AS total,
                   DATE(checkout_date) AS d,
                   COUNT(DISTINCT orders.id) AS num_items")
        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
@@ -113,8 +114,8 @@ class Order < ActiveRecord::Base
 
   def self.last_seven_weeks
 
-    Order.select("ROUND(SUM(quantity * products.price), 2) AS total, 
-                  ROUND((julianday(current_date) - julianday(checkout_date))/7, 0) AS wk, 
+    Order.select("ROUND(SUM(quantity * products.price), 2) AS total,
+                  ROUND((julianday(current_date) - julianday(checkout_date))/7, 0) AS wk,
                   COUNT(DISTINCT orders.id) AS num_items")
        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
        .joins("JOIN products ON order_contents.product_id=products.id")

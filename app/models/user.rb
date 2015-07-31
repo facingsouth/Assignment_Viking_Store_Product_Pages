@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
 
   # ------------------------ Methods -----------------
 
+  def shopping_cart
+    self.orders.where("checkout_date IS NULL").first || self.orders.create(user_id: self.id)
+  end
+
   def self.find_by_email(email_str)
     self.where("email = ?", email_str).first
   end
