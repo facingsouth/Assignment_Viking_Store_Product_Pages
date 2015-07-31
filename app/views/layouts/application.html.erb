@@ -37,21 +37,13 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-	<div class="container">
+	<div class="container-fluid">
 
     <div class = "row">
       <div class = "col-xs-10 col-xs-offset-1">
         <%= render partial: "shared/flash" %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <h1>Viking Store Admin Portal</h1>
-      </div>
-    </div>
-
-    <div class="row push-content"></div>
 
     <div class="row">
 
@@ -64,7 +56,13 @@
     </div>
 
     <footer>
-      <p>&copy; Company 2015</p>
+      <ul>
+        <li><a href="#">Admin Login</a></li>
+        <li>Contact</li>
+        <li>1-000-000-000</li>
+        <li>contact@cvikingstore.com</li>
+      </ul>
+      
     </footer>
 
   </div> <!-- /container -->

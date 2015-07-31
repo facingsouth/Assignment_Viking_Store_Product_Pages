@@ -7,6 +7,6 @@
   <li>User ID: <%= @address.user_id %></li>
   
   
-  <li><%= link_to "edit", edit_address_path(@address) %></li>
-  <li><%= link_to "delete", address_path(@address), method: :delete,  data: {confirm: "Really really delete this address?"} %></li>
+  <li><%= link_to "edit", edit_admin_address_path( @address) %></li>
+  <li><%= link_to "delete", admin_address_path( @address), method: :delete,  data: {confirm: "Really really delete this address?"} %></li>
 </ul>

@@ -1,7 +1,7 @@
 <div class = "row">
   <div class = "col-sm-12 text-center">
     <h2>Viking Store Users</h2>
-    <%= link_to new_user_path do %>
+    <%= link_to new_admin_user_path do %>
       <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
             content_tag(:strong, 'Create New User')
       end %>
@@ -44,7 +44,7 @@
               <td> <%= user.states.first.name %> </td>
             <% end -%>
 
-            <td> <%= link_to user.orders_checked_out.count, orders_path({:user_id => user.id}) %> </td>
+            <td> <%= link_to user.orders_checked_out.count, admin_orders_path({:user_id => user.id}) %> </td>
 
             <% if user.orders_checked_out.empty? %>
               <td> No orders </td>
@@ -53,8 +53,8 @@
             <% end -%>
 
             <td> <%= link_to 'Show', user %> </td>
-            <td> <%= link_to 'Edit', edit_user_path(user) %> </td>
-            <td> <%= link_to 'Delete', user_path(user), method: :delete, class: "alert-danger", 
+            <td> <%= link_to 'Edit', edit_admin_user_path(user) %> </td>
+            <td> <%= link_to 'Delete', admin_user_path(user), method: :delete, class: "alert-danger", 
                     data: { confirm: "Are you sure?" } %> </td>
           </tr>
         <% end %>

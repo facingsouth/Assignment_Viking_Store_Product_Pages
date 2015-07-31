@@ -80,7 +80,7 @@
     </div>
   </div><br>
 
-  <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+  <%= link_to "Edit Customer Profile", edit_admin_user_path(@user) %>
 
     <div class = "row">
     <div class = "col-sm-12">
@@ -179,8 +179,8 @@
 </div>
 
 
-  <li><%= link_to "Edit order", edit_order_path(@order) %></li>
-  <li><%= link_to "Delete order", order_path(@order), method: :delete,  data: {confirm: "Really really delete this order?"} %></li>
+  <li><%= link_to "Edit order", edit_admin_order_path(@order) %></li>
+  <li><%= link_to "Delete order", admin_order_path(@order), method: :delete,  data: {confirm: "Really really delete this order?"} %></li>
 
 
 

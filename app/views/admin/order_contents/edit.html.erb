@@ -1,4 +1,4 @@
-<% form_for @order do |f| %>
+<% form_for [:admin, @order] do |f| %>
 <table>
   <tr>
     <th>ID</th>
@@ -17,7 +17,7 @@
                 value=<%= row.quantity %> </td>
            <td> <%= number_to_currency(row.product.price) %> </td>
            <td> <%= number_to_currency(row.value) %> </td>
-            <td> <%link_to "Remove", order_content_path(row.id), method: :delete, class: "alert-danger", data: { confirm: "Are you sure you'd like to remove this product in order?" } %></td>
+            <td> <%= link_to "Remove", admin_order_content_path(row.id), method: :delete, class: "alert-danger", data: { confirm: "Are you sure you'd like to remove this product in order?" } %></td>
          </tr>
       <%end%>
 

@@ -6,7 +6,7 @@
     </h3>
 
     <br>
-    <%= link_to new_order_path({user_id: @user.id}) do %>
+    <%= link_to new_admin_order_path({user_id: @user.id}) do %>
       <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do %>
           <%= content_tag(:strong, "Create a New Order for #{@user.full_name}") %>
       <% end %>
@@ -20,7 +20,7 @@
 <hr>
 <% unless @user %>
   <h4>
-    Orders can only be created in User profile. <a href="/users">See all users here.</a>
+    Orders can only be created in User profile. <%= link_to "See all users here.", admin_users_path %>
   </h4>
 <% end -%>
 <div class="row scrollable">
