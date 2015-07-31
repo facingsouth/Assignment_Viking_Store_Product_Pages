@@ -1,31 +1,23 @@
-<div class="row text-center">
-  <h3>Viking Store Products</h3>
-
-
-</div>
-
 <main class = "container">
 
-  <div class = "pull-right">
-      <%= render partial: "filter_options", locals: {:category_id => @category_id}%>
-  </div>
 
   <section id="product-section">
-    <header>
-      <div class="row">
-        <div class="col-xs-offset-2 col-xs-8">
-          <h2>Products</h2>
+
+    <div class="panel panel-default">
+      
+      <div class="panel-heading text-center">
+        <h2>Products</h2>
+      </div>
+
+      <div class="panel-body photo-row">
+        <div class = "row pull-right">
+            <%= render partial: "filter_options", locals: {:category_id => @category_id}%>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+          <%= render @products %>
         </div>
       </div>
-    </header>
-
-
-
-    <div class = "photo-row">
-
-
-      <%= render @products %>
-
     </div>
 
 

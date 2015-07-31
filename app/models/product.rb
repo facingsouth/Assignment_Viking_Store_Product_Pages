@@ -29,12 +29,17 @@ class Product < ActiveRecord::Base
 
   end
 
+  def self.products_in_category(cat_id)
+    Product.where("category_id = ?", cat_id)
+  end
+
   def self.category_items(cat_id)
-    Product.where("category_id = ?", cat_id).select("id, name")
+    self.products_in_category(cat_id).select("id, name")
   end
 
   def self.delete_category(cat_id)
     Product.where("category_id = ?", cat_id)
             .update_all(:category_id => nil)
   end
+
 end
