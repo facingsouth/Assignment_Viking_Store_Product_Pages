@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   root "users#index"
   get "/dashboard" => "analytics#dashboard"
 
-  get "/admin" => "admins#portal"
+   get "/admin/portal" => "admins#portal"
 
-  resources :categories
-  resources :products
-  resources :users
-  resources :addresses
-  resources :orders
-  resources :order_contents
+  namespace :admin do
+    resources :categories
+    resources :products
+    resources :users
+    resources :addresses
+    resources :orders
+    resources :order_contents
+  end
 
   # get '/orders/:id', to: 'orders#order_list'
 

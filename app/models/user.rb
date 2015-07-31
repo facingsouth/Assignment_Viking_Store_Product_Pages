@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
-  validates :first_name, :last_name, :email,  
+  validates :first_name, :last_name, :email,
             :length => {:in => (1..64), :message => "Must be between 1 and 64 characters."}
   validates :email, :format => {:with => /@/}
 
 # ----------------- Associations -------------------
 
 
-  has_many :addresses, dependent: :destroy
+  has_many :addresses #, dependent: :destroy #before_destroy/around_destroy to keep addresses associated with orders
 
   has_many :credit_cards, dependent: :destroy
 
@@ -15,10 +15,10 @@ class User < ActiveRecord::Base
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
 
-  belongs_to :default_shipping_address_id, 
+  belongs_to :default_shipping_address_id,
               class_name: "Address",
               foreign_key: :shipping_id
-  belongs_to :default_billing_address_id, 
+  belongs_to :default_billing_address_id,
               class_name: "Address",
               foreign_key: :billing_id
 
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def self.top_user_location(scope, num=3)
-    # Finds top user 
+    # Finds top user
     if scope == 'state'
       User.select("COUNT(*) AS num_of_users, states.name")
           .joins("JOIN addresses ON users.billing_id=addresses.id")
@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
 
 
   def self.highest_avg_order_value
-      # subquery = 
+      # subquery =
       # User.select("ROUND(SUM(quantity * products.price), 2) AS order_total, users.id AS user_num, users.first_name, users.last_name")
       #     .joins("JOIN orders ON orders.user_id=users.id")
       #     .joins("JOIN order_contents ON order_contents.order_id=orders.id")
