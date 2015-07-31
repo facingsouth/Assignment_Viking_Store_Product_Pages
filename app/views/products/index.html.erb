@@ -7,7 +7,7 @@
 <main class = "container">
 
   <div class = "pull-right">
-      <%= render partial: "filter_options"%>
+      <%= render partial: "filter_options", locals: {:category_id => @category_id}%>
   </div>
 
   <section id="product-section">

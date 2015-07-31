@@ -1,13 +1,14 @@
 class ProductsController < ApplicationController
 
   def index
-    if whitelisted_params
-      @products = Product.where("category_id =?", whitelisted_params[:category_id].to_i)
-    else
-      @products = Product.all.limit(12)
+    @products = Product.includes(:category)
+    @category_id = params[:category_id]
+    # fail
+    if params[:category_id]
+      @products = @products.where("category_id =?", @category_id)
     end
 
-    render :index, locals: {:category_id => }
+    render :index
   end
 
 
