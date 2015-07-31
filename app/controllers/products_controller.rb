@@ -8,10 +8,15 @@ class ProductsController < ApplicationController
     end
 
     session[:cart] ||= {}
-    product_id = params[:product_id]i
-    session[:cart][product_id] = session[:cart][product_id].to_i + 1
-    fail
-    render :index
+    product_id = params[:product_id]
+    if product_id.nil? #first visiting will flash error, will fix later
+      flash.now[:error] = "Product cannot be added!"
+      render :index
+    else
+      session[:cart][product_id] = session[:cart][product_id].to_i + 1
+      flash.now[:success] = "Product #{product_id} is added to your cart!"
+      render :index
+    end
   end
 
 
