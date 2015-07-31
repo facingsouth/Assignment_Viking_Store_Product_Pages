@@ -2,9 +2,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:category)
-    @category_id = params[:category_id]
-    # fail
-    if params[:category_id]
+    if params[:product]
+      @category_id = whitelisted_params[:category_id]
       @products = @products.where("category_id =?", @category_id)
     end
 
