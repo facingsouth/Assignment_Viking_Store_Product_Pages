@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :products, :only => [:index, :show]
+  resource :session, :only => [:new, :create, :destroy]
 
   # get '/orders/:id', to: 'orders#order_list'
 
