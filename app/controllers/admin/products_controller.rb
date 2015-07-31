@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class ProductsController < AdminController
 
   def index
     @products = Product.all

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < AdminController
 
   def index
     @users = User.all

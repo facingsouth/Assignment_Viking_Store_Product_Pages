@@ -1,5 +1,4 @@
-class OrdersController < ApplicationController
-
+class OrdersController < AdminController
 
   def index
     if params[:user_id]
@@ -27,11 +26,11 @@ class OrdersController < ApplicationController
     if @cart_id.first
       @order = @cart_id.first
       flash[:error]="Cart already exists, you can only have one cart"
-      redirect_to order_path(@order)
+      redirect_to edit_order_path(@order)
     else
         if @order.save
           flash[:success] = "New order created."
-          redirect_to order_path(@order)
+          redirect_to edit_order_path(@order)
         else
           flash.now[:error] = @order.errors.full_messages.first
           render :new
