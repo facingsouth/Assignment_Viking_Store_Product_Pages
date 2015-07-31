@@ -1,4 +1,4 @@
-class AdminsController < AdminController
+class Admin::AdminsController < AdminController
 
   def portal
   end

@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+class Admin::AddressesController < AdminController
 
 
   def index
@@ -7,7 +7,7 @@ class AddressesController < ApplicationController
         @addresses = User.find(params[:user_id]).addresses
         @user = User.find(params[:user_id])
       else
-        flash[:error] = "No user with this ID found." 
+        flash[:error] = "No user with this ID found."
         redirect_to addresses_path
       end
     else
@@ -71,11 +71,11 @@ class AddressesController < ApplicationController
   private
 
   def white_listed_address_params
-    params.require(:address).permit(:street_address, 
-                                    :secondary_address, 
-                                    :zip_code, 
-                                    :city_id, 
-                                    :state_id, 
+    params.require(:address).permit(:street_address,
+                                    :secondary_address,
+                                    :zip_code,
+                                    :city_id,
+                                    :state_id,
                                     :user_id)
   end
 

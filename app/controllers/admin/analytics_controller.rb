@@ -1,4 +1,4 @@
-class AnalyticsController < AdminController
+class Admin::AnalyticsController < AdminController
 
   def dashboard
     @new_users_7 = User.user_count(7)

@@ -1,4 +1,4 @@
-class OrderContentsController < AdminController
+class Admin::OrderContentsController < AdminController
 
   # def edit
   #   @order= Order.find(params[:order_id])

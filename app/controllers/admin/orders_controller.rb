@@ -1,4 +1,4 @@
-class OrdersController < AdminController
+class Admin::OrdersController < AdminController
 
   def index
     if params[:user_id]
