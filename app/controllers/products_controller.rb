@@ -8,9 +8,9 @@ class ProductsController < ApplicationController
     end
 
     session[:cart] ||= {}
-
-    session[:cart][:product_id] = session[:cart][:product_id].to_i + 1
-
+    product_id = params[:product_id]i
+    session[:cart][product_id] = session[:cart][product_id].to_i + 1
+    fail
     render :index
   end
 
