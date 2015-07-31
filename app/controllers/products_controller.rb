@@ -14,8 +14,13 @@ class ProductsController < ApplicationController
       render :index
     else
       session[:cart][product_id] = session[:cart][product_id].to_i + 1
-      flash.now[:success] = "Product #{product_id} is added to your cart!"
+      flash.now[:success] = "#{Product.find(product_id).name} is added to your cart!"
       render :index
+    end
+
+    if signed_in_user?
+      cart = current_user.orders_in_cart.first
+      cart.update_cart()
     end
 
   end

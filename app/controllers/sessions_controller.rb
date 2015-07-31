@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       sign_in user
-      flash[:success] = "Thanks for signing in!"
+      flash[:success] = "Thanks for signing in, #{user.full_name}!"
       redirect_to root_path
     else
       flash[:error] = "We couldn't sign you in due to error!"

@@ -19,6 +19,21 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def update_cart(contents)
+    ocs = self.order_contents
+    pids = ocs.pluck(:product_id)
+    ids = ocs.pluck(:id)
+    contents.each do |item_id, quantity|
+      if pids.include?(item_id.to_i)
+        oc = ocs.where("order_id = ? AND product_id = ?", self.id, item_id.to_i)
+        oc.quantity += quantity
+        oc.save
+      else
+        order_contents.create(product_id: item_id.to_i, quantity: quantity)
+      end
+    end
+  end
+
 
   def bill_card
     CreditCard.find(self.credit_card_id).card_number
