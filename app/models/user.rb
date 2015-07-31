@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
 
   # ------------------------ Methods -----------------
 
+  def self.find_by_email(email_str)
+    self.where("email = ?", email_str).first
+  end
+
   # Last 7 Days
 
   def full_name

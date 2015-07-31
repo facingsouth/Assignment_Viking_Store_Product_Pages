@@ -15,7 +15,15 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign In</a></li>
+
+        <li>
+        <% if current_user %>
+          <%= link_to "Sign Out", session_path, method: :delete %>
+        <% else %>
+          <a href=<%=new_session_path%>>Sign In</a>
+        <% end %>
+        </li>
+
         <li><a href="#">View Cart</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

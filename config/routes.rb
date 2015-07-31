@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root "users#index"
+  root "products#index"
 
    get "/admin/portal" => "admins#portal"
 

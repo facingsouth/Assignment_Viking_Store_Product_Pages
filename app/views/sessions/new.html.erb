@@ -1,0 +1,46 @@
+<main class = "container">
+  <div class = "row">
+
+    <div class="col-sm-12">
+      <h2>Sign Up or Sign In</h2>
+    </div>
+
+    <section class="col-md-6">
+
+      <h4>I do NOT have an account...</h4>
+
+      <div>
+        <%= link_to "new_users_path" do%>
+
+      <%= button_tag(class: 'btn btn-lg btn-primary') do %>
+          <%= content_tag(:strong, "Sign Up") %>
+          <% end %>
+
+        <% end %>
+      </div>
+
+    </section>
+
+    <section class="col-md-6">
+
+      <h4>I have an account...</h4>
+      <div>
+        <%=form_tag session_path method: :post do%>
+          <%= label_tag :email, "Email Address" %>
+          <%= email_field_tag :email %>
+
+          <%= label_tag :password, "Password" %>
+          <%= password_field_tag :password %>
+
+          <%= submit_tag "Sign In", class: "btn btn-lg btn-primary"%>
+
+
+
+        <% end %>
+
+      </div>
+
+    </section>
+
+  </div>
+</main>
