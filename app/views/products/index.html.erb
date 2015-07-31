@@ -1,24 +1,34 @@
 <div class="row text-center">
   <h3>Viking Store Products</h3>
 
-  <%= link_to new_admin_product_path do %>
-    <%= button_tag(type: 'button', class: 'btn btn-lg btn-primary') do
-            content_tag(:strong, 'Create New Product')
-    end %>
-  <% end %>
 
 </div>
-<hr>
-<div class="row scrollable">
-  <table class="table table-bordered scrollable">
-    <tr>
 
-      <th>Name</th>
+<main class = "container">
 
-      <th>Price</th>
+  <div class = "pull-right">
+      <%= render partial: "filter_options"%>
+  </div>
 
-      <th></th>
-    </tr>
-    <%= render @products %>
-  </table>
-</div>
+  <section id="product-section">
+    <header>
+      <div class="row">
+        <div class="col-xs-offset-2 col-xs-8">
+          <h2>Products</h2>
+        </div>
+      </div>
+    </header>
+
+
+
+    <div class = "photo-row">
+
+
+      <%= render @products %>
+
+    </div>
+
+
+    <div class = "clearfix"></div>
+  </section>
+</main>

@@ -1,8 +1,23 @@
-<tr>
 
-  <td><%= product.name %></td>
 
-  <td><%= number_to_currency(product.price) %></td>
 
-  <td><%= link_to "Add to cart", '#' %></td>
-</tr>
+<div class="col-md-4 col-sm-6 product-index">
+  <div class="row">
+    <div class="col-sm-10 col-offset-1 text-center"><%= product.name %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= number_to_currency(product.price) %>
+      <a href="#" class="thumbnail img-responsive">
+        <%= image_tag "icon_photo_small.png" %>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 col-offset-2 product_footer text-center">
+      <%= link_to "Add to cart", '#' %>
+    </div>
+  </div>
+</div>

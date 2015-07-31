@@ -1,0 +1,6 @@
+<%= form_tag products_path, method: :get do %>
+
+  <%= collection_select( :product, :category_id, Category.all, :id, :name, :include_blank => "Select Category") %>
+  <%= submit_tag "Apply Filter" %>
+
+<% end %>
