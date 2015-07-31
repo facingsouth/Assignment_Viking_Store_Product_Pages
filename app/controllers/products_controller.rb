@@ -7,9 +7,11 @@ class ProductsController < ApplicationController
       @products = Product.products_in_category(@category_id)
     end
 
-    session[:cart] ||= {}
-    product_id = params[:product_id]i
-    session[:cart][product_id] = session[:cart][product_id].to_i + 1
+    if params[:product_id]
+      session[:cart] ||= {}
+      product_id = params[:product_id]
+      session[:cart][product_id] = session[:cart][product_id].to_i + 1
+    end
     fail
     render :index
   end
