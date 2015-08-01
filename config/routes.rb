@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :orders, :only => [:update, :checkout]
   get "/shopping_cart" => "orders#shopping_cart"
   get '/add_to_cart' => "carts#add_to_cart"
+  post '/checkout' => 'carts#checkout'
 
   # get '/orders/:id', to: 'orders#order_list'
 

@@ -1,0 +1,13 @@
+<%= form_for @cart do |cart_fields| %>
+
+    <%= cart_fields.fields_for :order_contents do |item| %>
+      <%= "item.object is #{item.object}" %>
+          <%= item.label :quantity, "quantity" %>
+          <%= item.text_field :quantity%>
+
+          <%= item.label :_destroy,"Remove Item" %>
+          <%= item.check_box :_destroy %>
+    <%end%>
+    <%= cart_fields.submit "Update Order Contents" %>
+
+<% end %>

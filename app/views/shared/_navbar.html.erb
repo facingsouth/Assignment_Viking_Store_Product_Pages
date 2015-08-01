@@ -20,11 +20,11 @@
         <% if current_user %>
           <%= link_to "Sign Out", session_path, method: :delete %>
         <% else %>
-          <a href=<%=new_session_path%>>Sign In</a>
+          <%= link_to "Sign In", new_session_path %>
         <% end %>
         </li>
 
-        <li><a href='#'>View Cart</a></li>
+        <li><%= link_to "View Cart", shopping_cart_path %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

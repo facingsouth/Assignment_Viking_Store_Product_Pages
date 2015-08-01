@@ -12,4 +12,13 @@ class CartsController < ApplicationController
       redirect_to products_path
     end
   end
+
+  def checkout
+    if signed_in_user?
+      render :checkout
+    else
+      flash[:notice] = "To checkout, please sign in first!"
+      redirect_to new_session_path
+    end
+  end
 end

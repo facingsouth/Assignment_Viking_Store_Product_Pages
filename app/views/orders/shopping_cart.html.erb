@@ -1,30 +1,16 @@
-
-<h2>Shopping Cart Contents</h2>
-<div>
-<% form_for @order do |f| %>
-<table>
-
-  <%= f.fields_for :order_contents do |content_field| %>
-      <% row = content_field.object %>
-    <tr>
-      <td> <%= row.product.name %> </td>
-      <td> <%= row.product.category %></td>
-      <td> <%= number_to_currency(row.product.price) %> </td>
-
-      <td> <%= row.label :quantity %>
-            <%= row.text_field :quantity, value: row.quantity %>
-      </td>
-
-       <td> Total Price: <%= number_to_currency(row.value) %> </td>
-
-        <td> <%= row.label :_destroy,"Remove Item" %>
-          <%= row.check_box :_destroy %> </td>
-     </tr>
-  <%end%>
-
-
-
-  <%= f.submit "Update Order Contents" %>
-<% end %>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading text-center">
+    <h2>Shopping Cart Contents</h2>
+  </div>
+  <div class="panel-body">    
+    <% if signed_in_user? %>
+      <%= render partial: 'not_checkout_order_form' %>
+    <% else %>
+      <%= render partial: 'session_cart_form' %>
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <%= button_to "Checkout", checkout_path, class: "btn btn-primary" %>
+  </div>
 </div>
+
