@@ -1,15 +1,15 @@
 <div class="panel panel-default">
   <div class="panel-heading text-center">
-    <h1>Sign Up</h1>  
+    <h1>Edit Your Profile</h1>  
   </div>
   <div class="panel-body">
     <%= form_for @user do |user_field| %>
       <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
       <%= render partial: 'user_form', locals: {user_field: user_field}%>
       <div class="panel panel-default">
-        <div class="panel-heading">Complete Sign Up</div>
+        <div class="panel-heading">Update Your Profile</div>
         <div class="panel-body">
-          <%= user_field.submit "Sign Up", class: "btn btn-primary" %>
+          <%= user_field.submit "Update", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %> 
