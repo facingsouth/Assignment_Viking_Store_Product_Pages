@@ -1,19 +1,21 @@
 <div class="panel panel-default">
   <div class="panel-heading text-center">
-    <h1>Edit Your Profile</h1>  
+    <h1>Update Profile</h1>  
   </div>
   <div class="panel-body">
-    <div class="row">
-      <%= form_for @user, class: "form-group" do |user_field| %>
-        <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
-        <%= render partial: 'user_form', locals: {user_field: user_field}%>
+    <%= form_for @user, class: "form-group" do |user_field| %>
+      <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
+      <%= render partial: 'user_form', locals: {user_field: user_field}%>
+      <div class="col-md-6 pull-right">
         <div class="panel panel-default">
-          <div class="panel-heading">Update Your Profile</div>
-          <div class="panel-body">
+          <div class="panel-heading text-center">Update Your Profile</div>
+          <div class="panel-body text-center">
             <%= user_field.submit "Update", class: "btn btn-primary" %>
+            <br>
+            <%= link_to "Delete my account", user_path(@user), method: :delete, data: {confirm: "Are you sure you want to delete your account?"} %>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %> 
   </div>
 </div>

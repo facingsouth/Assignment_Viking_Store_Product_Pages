@@ -3,7 +3,7 @@
     <h1>Sign Up</h1>  
   </div>
   <div class="panel-body">
-    <%= form_for @user do |user_field| %>
+    <%= form_for @user, class: "form-group" do |user_field| %>
       <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
       <%= render partial: 'user_form', locals: {user_field: user_field}%>
       <div class="col-md-6 pull-right">

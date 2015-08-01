@@ -9,7 +9,7 @@ class Address < ActiveRecord::Base
 
   # ------------------- Validations ---------------------
 
-  validates :street_address, :zip_code, :state_id, :user_id,
+  validates :street_address, :zip_code, :state_id,
             :presence => true
 
 

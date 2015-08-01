@@ -1,36 +1,38 @@
 <div class="col-md-6">
-<% counter = 0 %>
+<% index = 0 %>
 <%= user_field.fields_for :addresses do |address_fields| %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <% counter += 1 %>
-      <h5>Saved Address <%= counter %> (optional)</h5>
+      <% index += 1 %>
+      <h5>Saved Address <%= index %> (optional)</h5>
     </div>
     <div class="panel-body">
       <%= address_fields.label :street_address, "Street Address" %>
-      <%= address_fields.text_field :street_address %>
+      <%= address_fields.text_field :street_address, class: "form-control" %>
       <br>
       <%= address_fields.label :city_id, "City" %>
-      <%= address_fields.text_field :city_id %>
+      <%= address_fields.text_field :city_id, class: "form-control" %>
       <br>
       <%= address_fields.collection_select( :state_id,
                                             State.all,
                                             :id,
-                                            :name
+                                            :name,
+                                            {include_blank: "Select State"},
+                                            class: "form-control"
                                           ) %>
       <br>
       <%= address_fields.label :zip_code, "Zip Code" %>
-      <%= address_fields.text_field :zip_code %>
-      <br>
-      <%= user_field.check_box :shipping_id %>
-      <%= user_field.label :shipping_id, "Default Shipping Address" %>
-      <br>
-      <%= user_field.check_box :billing_id %>
-      <%= user_field.label :billing_id, "Default Billing Address" %>
+      <%= address_fields.text_field :zip_code, class: "form-control" %>
       <br>
       <% if address_fields.object.persisted? %>
-        <%= address_fields.label :_destroy, "Delete Address" %>
+        <%= user_field.radio_button :shipping_id, address_fields.object.id%>
+        <%= user_field.label :shipping_id, "Default Shipping Address" %>
+        <br>
+        <%= user_field.radio_button :billing_id, address_fields.object.id%>
+        <%= user_field.label :billing_id, "Default Billing Address" %>
+        <br>
         <%= address_fields.check_box :_destroy %>
+        <%= address_fields.label :_destroy, "Delete Address" %>
       <% end %>
       <br>
     </div>
