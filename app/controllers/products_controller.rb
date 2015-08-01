@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     if signed_in_user?
       cart = current_user.shopping_cart #unplaced existing order
       cart.merge_cart_with_order(session[:cart])
+      session.delete(:cart)
     else
       #make an order
     end

@@ -1,12 +1,24 @@
 <%= form_for @cart do |cart_fields| %>
 
-    <%= cart_fields.fields_for :order_contents do |item| %>
-      <%= "item.object is #{item.object}" %>
-          <%= item.label :quantity, "quantity" %>
-          <%= item.text_field :quantity%>
+    <%= cart_fields.fields_for :order_contents do |oc_fields| %>
+          <%= content_tag :div do -%>
+            <%= oc_fields.object.product.name %><br>
+            <%= oc_fields.object.product.category.name %><br>
+            $<%= oc_fields.object.product.price %>
+          <% end -%>
 
-          <%= item.label :_destroy,"Remove Item" %>
-          <%= item.check_box :_destroy %>
+          <%= content_tag :div do -%>
+            <%= oc_fields.label :quantity, "quantity" %>
+            <%= oc_fields.text_field :quantity%><br>
+
+            <%= oc_fields.label :_destroy,"Remove Item" %>
+            <%= oc_fields.check_box :_destroy %><br>
+
+            Total Price: $<%= oc_fields.object.value %>
+          <% end -%>
+
+          <hr>
+
     <%end%>
     <%= cart_fields.submit "Update Order Contents" %>
 

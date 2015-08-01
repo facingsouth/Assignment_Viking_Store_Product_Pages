@@ -12,6 +12,9 @@ class Order < ActiveRecord::Base
               class_name: "Address",
               foreign_key: :billing_id
 
+  accepts_nested_attributes_for :order_contents, 
+                                 allow_destroy: true
+
 
   def value
     self.order_contents.reduce(0) do |sum, row|

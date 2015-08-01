@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading text-center">
+    <h1>Sign Up</h1>  
+  </div>
+  <div class="panel-body">
+    <%= form_for @user do |user_field| %>
+        <%= render partial: 'user_form', locals: {user_field: user_field}%>
+    <% end %> 
+  </div>
+</div>
