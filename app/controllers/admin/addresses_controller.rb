@@ -8,7 +8,7 @@ class Admin::AddressesController < AdminController
         @user = User.find(params[:user_id])
       else
         flash[:error] = "No user with this ID found."
-        redirect_to addresses_path
+        redirect_to admin_addresses_path
       end
     else
       @addresses = Address.all
@@ -27,7 +27,7 @@ class Admin::AddressesController < AdminController
     # @user = User.find(@address.user_id)
     if @address.save
       flash[:success] = "New address created."
-      redirect_to addresses_path
+      redirect_to admin_addresses_path
     else
       flash.now[:error] = @address.errors.full_messages.first
       render :new
@@ -49,7 +49,7 @@ class Admin::AddressesController < AdminController
     @address.city_id = check_city(params[:address][:city])
     if @address.update(white_listed_address_params)
       flash[:success] = "Address successfully modified."
-      redirect_to addresses_path
+      redirect_to admin_addresses_path
     else
       flash.now[:error] = @address.errors.full_messages.first
       render :edit
@@ -61,7 +61,7 @@ class Admin::AddressesController < AdminController
     @address = Address.find(params[:id])
     if @address.destroy
       flash[:success] = "address successfully deleted."
-      redirect_to addresses_path
+      redirect_to admin_addresses_path
     else
       flash[:error] = @address.errors.full_messages.first
       redirect_to session.delete(:return_to)

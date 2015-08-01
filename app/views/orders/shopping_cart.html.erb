@@ -1,0 +1,30 @@
+
+<h2>Shopping Cart Contents</h2>
+<div>
+<% form_for @order do |f| %>
+<table>
+
+  <%= f.fields_for :order_contents do |content_field| %>
+      <% row = content_field.object %>
+    <tr>
+      <td> <%= row.product.name %> </td>
+      <td> <%= row.product.category %></td>
+      <td> <%= number_to_currency(row.product.price) %> </td>
+
+      <td> <%= row.label :quantity %>
+            <%= row.text_field :quantity, value: row.quantity %>
+      </td>
+
+       <td> Total Price: <%= number_to_currency(row.value) %> </td>
+
+        <td> <%= row.label :_destroy,"Remove Item" %>
+          <%= row.check_box :_destroy %> </td>
+     </tr>
+  <%end%>
+
+
+
+  <%= f.submit "Update Order Contents" %>
+<% end %>
+</table>
+</div>

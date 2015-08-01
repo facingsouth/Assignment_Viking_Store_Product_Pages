@@ -42,7 +42,7 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
     if @user.destroy
       flash[:success] = "User Deleted"
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash[:error] = @user.errors.full_messages.first
       render :edit

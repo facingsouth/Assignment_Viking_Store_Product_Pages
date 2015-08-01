@@ -21,7 +21,7 @@ class Admin::CategoriesController < AdminController
     @category = Category.new(white_listed_cat_params)
     if @category.save
       flash[:success] = "New category created"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Did not create category, try again."
       render :new
@@ -32,7 +32,7 @@ class Admin::CategoriesController < AdminController
     @category = Category.find(params[:id])
     if @category.update(white_listed_cat_params)
       flash[:success] = "Category updated."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Did not update category, try again."
       render :edit
@@ -45,7 +45,7 @@ class Admin::CategoriesController < AdminController
     if @category.destroy
       Product.delete_category(params[:id])
       flash[:success] = "Category deleted."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash[:error] = "Can not be deleted."
       redirect_to session.delete(:return_to)

@@ -52,9 +52,9 @@
               <td> <%= user.orders_checked_out.first.checkout_date.to_date %> </td>
             <% end -%>
 
-            <td> <%= link_to 'Show', user %> </td>
+            <td> <%= link_to 'Show', admin_user_path(user) %> </td>
             <td> <%= link_to 'Edit', edit_admin_user_path(user) %> </td>
-            <td> <%= link_to 'Delete', admin_user_path(user), method: :delete, class: "alert-danger", 
+            <td> <%= link_to 'Delete', admin_user_path(user), method: :delete, class: "alert-danger",
                     data: { confirm: "Are you sure?" } %> </td>
           </tr>
         <% end %>

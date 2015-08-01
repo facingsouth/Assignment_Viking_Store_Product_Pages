@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
    get "/admin/portal" => "admins#portal"
 
+
   namespace :admin do
     get "/dashboard" => "analytics#dashboard"
     resources :categories
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :products, :only => [:index, :show]
   resource :session, :only => [:new, :create, :destroy]
+  resources :orders, :only => [:update, :checkout]
+  get "/shopping_cart" => "orders#shopping_cart", as: "cart"
 
   # get '/orders/:id', to: 'orders#order_list'
 

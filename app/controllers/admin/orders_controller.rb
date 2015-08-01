@@ -26,7 +26,7 @@ class Admin::OrdersController < AdminController
     if @cart_id.first
       @order = @cart_id.first
       flash[:error]="Cart already exists, you can only have one cart"
-      redirect_to edit_order_path(@order)
+      redirect_to edit_admin_order_path(@order)
     else
         if @order.save
           flash[:success] = "New order created."
@@ -63,7 +63,7 @@ class Admin::OrdersController < AdminController
         row.save
       end
       flash[:success] = "Order successfully modified."
-      redirect_to order_path(@order)
+      redirect_to admin_order_path(@order)
     else
 
       flash.now[:error] = "Reloading!"#@order.errors.full_messages.first
@@ -76,7 +76,7 @@ class Admin::OrdersController < AdminController
     @order = Order.find(params[:id])
     if @order.destroy
       flash[:success] = "Order successfully deleted."
-      redirect_to order_path
+      redirect_to admin_orders_path
     else
       flash[:error] = @order.errors.full_messages.first
       redirect_to session.delete(:return_to)
