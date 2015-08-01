@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
       @products = Product.products_in_category(@category_id)
     end
 
-    if signed_in_user?
+    if signed_in_user? && session[:cart]
       cart = current_user.shopping_cart #unplaced existing order
       cart.merge_cart_with_order(session[:cart])
       session.delete(:cart)

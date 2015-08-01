@@ -3,15 +3,17 @@
     <h1>Edit Your Profile</h1>  
   </div>
   <div class="panel-body">
-    <%= form_for @user do |user_field| %>
-      <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
-      <%= render partial: 'user_form', locals: {user_field: user_field}%>
-      <div class="panel panel-default">
-        <div class="panel-heading">Update Your Profile</div>
-        <div class="panel-body">
-          <%= user_field.submit "Update", class: "btn btn-primary" %>
+    <div class="row">
+      <%= form_for @user, class: "form-group" do |user_field| %>
+        <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
+        <%= render partial: 'user_form', locals: {user_field: user_field}%>
+        <div class="panel panel-default">
+          <div class="panel-heading">Update Your Profile</div>
+          <div class="panel-body">
+            <%= user_field.submit "Update", class: "btn btn-primary" %>
+          </div>
         </div>
-      </div>
-    <% end %> 
+      <% end %>
+    </div>
   </div>
 </div>

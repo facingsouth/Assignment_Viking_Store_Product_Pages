@@ -1,24 +1,24 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3>Account Information</h3>
-  </div>
-  <div class="panel-body">
-    <%= user_field.label :email, "Email Address" %>
-    <%= user_field.email_field :email%>
-    <br>
-    <%= user_field.label :email, "Confirm Email" %>
-    <%= user_field.email_field :email%>
-    <br>
-    <%= user_field.label :password, "Password" %>
-    <%= user_field.password_field :password%>
-    <br>
-    <%= user_field.label :password, "Confirm Password" %>
-    <%= user_field.password_field :password%>
-    <br>
-    <%= user_field.label :first_name, "First Name" %>
-    <%= user_field.text_field :first_name%>
-    <br>
-    <%= user_field.label :last_name, "Last Name" %>
-    <%= user_field.text_field :last_name%>
-  </div>
+<div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Account Information</div>
+      <div class="panel-body">
+        <%= user_field.label :email, "Email Address" %>
+        <%= user_field.email_field :email%>
+        <br>
+        <%= user_field.label :email, "Confirm Email" %>
+        <%= user_field.email_field :email%>
+        <br>
+        <%= user_field.label :password, "Password" %>
+        <%= user_field.password_field :password%>
+        <br>
+        <%= user_field.label :password, "Confirm Password" %>
+        <%= user_field.password_field :password%>
+        <br>
+        <%= user_field.label :first_name, "First Name" %>
+        <%= user_field.text_field :first_name%>
+        <br>
+        <%= user_field.label :last_name, "Last Name" %>
+        <%= user_field.text_field :last_name%>
+      </div>
+    </div>
 </div>

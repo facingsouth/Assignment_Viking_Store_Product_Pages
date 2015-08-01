@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(whitelisted_user_params)
+    sjk
     if @user.save
       flash[:success] = "Congrats! You are a member now!!"
       sign_in @user
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
     @user.addresses.build
   end
 
-  def create
+  def update
     @user = User.find(params[:id])
     if @user.update(whitelisted_user_params)
       flash[:success] = "Congrats! Your profile is updated!!"

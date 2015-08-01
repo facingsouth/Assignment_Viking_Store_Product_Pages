@@ -6,10 +6,12 @@
     <%= form_for @user do |user_field| %>
       <%= render partial: 'addresses_form', locals: {user_field: user_field}%>
       <%= render partial: 'user_form', locals: {user_field: user_field}%>
-      <div class="panel panel-default">
-        <div class="panel-heading">Complete Sign Up</div>
-        <div class="panel-body">
-          <%= user_field.submit "Sign Up", class: "btn btn-primary" %>
+      <div class="col-md-6 pull-right">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">Complete Sign Up</div>
+          <div class="panel-body text-center">
+            <%= user_field.submit "Sign Up", class: "btn btn-primary" %>
+          </div>
         </div>
       </div>
     <% end %> 
