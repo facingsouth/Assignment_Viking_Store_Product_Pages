@@ -11,12 +11,12 @@
   <%= content_tag :div, class: "form-group" do -%>
     <%=f.label :name %>
     <%=f.text_field :name %>
-  <%= end -%>
+  <% end -%>
 
   <%= content_tag :div, class: "form-group" do -%>
     <%=f.label :description %>
     <%=f.text_area :description %>
-  <%= end -%>
+  <% end -%>
 
   <%= content_tag :div, class: "form-group" do -%>
     <% if @category.persisted? %>
