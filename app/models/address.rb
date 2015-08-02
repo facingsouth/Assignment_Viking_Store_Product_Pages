@@ -17,6 +17,8 @@ class Address < ActiveRecord::Base
   # before_create :check_city
 
   # ------------------- Methods ---------------------
-  
+  def full_address
+    "#{street_address}, #{city.name}, #{state.name}, #{zip_code}"
+  end
 
 end

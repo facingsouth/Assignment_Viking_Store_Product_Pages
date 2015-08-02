@@ -3,7 +3,7 @@ class CartsController < ApplicationController
   def add_to_cart
     session[:cart] ||= {}
     product_id = params[:product_id]
-    if product_id.nil? #first visiting will flash error, will fix later
+    if product_id.nil?
       flash[:error] = "Product cannot be added!"
       redirect_to products_path
     else
@@ -15,6 +15,7 @@ class CartsController < ApplicationController
 
   def checkout
     if signed_in_user?
+      @order = current_user.shopping_cart
       render :checkout
     else
       flash[:notice] = "To checkout, please sign in first!"

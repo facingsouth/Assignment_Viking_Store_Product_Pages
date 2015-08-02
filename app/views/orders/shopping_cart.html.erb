@@ -2,12 +2,14 @@
   <div class="panel-heading text-center">
     <h2>Shopping Cart Contents</h2>
   </div>
-  <div class="panel-body">    
-    <% if signed_in_user? %>
-      <%= render partial: 'not_checkout_order_form' %>
-    <% else %>
-      <%= render partial: 'session_cart_form' %>
-    <% end %>
+  <div class="panel-body">
+    <table class="table-bordered">
+      <% if signed_in_user? %>
+        <%= render partial: 'not_checkout_order_form' %>
+      <% elsif session[:cart] %>
+        <%= render partial: 'session_cart_form' %>
+      <% end %>
+    </table>
   </div>
   <div class="panel-body">
     <%= button_to "Checkout", checkout_path, class: "btn btn-primary" %>

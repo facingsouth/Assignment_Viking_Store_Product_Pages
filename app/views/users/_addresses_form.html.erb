@@ -13,6 +13,7 @@
       <%= address_fields.label :city_id, "City" %>
       <%= address_fields.text_field :city_id, class: "form-control" %>
       <br>
+      <%= address_fields.label :state_id, "State" %>
       <%= address_fields.collection_select( :state_id,
                                             State.all,
                                             :id,

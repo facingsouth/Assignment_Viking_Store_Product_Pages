@@ -1,12 +1,15 @@
 <%= form_for @cart do |cart_fields| %>
-
+ 
     <%= cart_fields.fields_for :order_contents do |oc_fields| %>
+  <tr>
+      <td class="col-sm-7">
           <%= content_tag :div do -%>
             <%= oc_fields.object.product.name %><br>
             <%= oc_fields.object.product.category.name %><br>
             $<%= oc_fields.object.product.price %>
           <% end -%>
-
+      </td>
+      <td class="col-sm-5">
           <%= content_tag :div do -%>
             <%= oc_fields.label :quantity, "quantity" %>
             <%= oc_fields.text_field :quantity%><br>
@@ -16,10 +19,17 @@
 
             Total Price: $<%= oc_fields.object.value %>
           <% end -%>
-
-          <hr>
+      </td>
+  </tr>
 
     <%end%>
-    <%= cart_fields.submit "Update Order Contents" %>
-
+    <tr>
+    <td class="col-sm-7">
+      Total: $<%= @cart.value %>
+    </td>
+    <td class="col-sm-5">
+      
+      <%= cart_fields.submit "Update Order Contents" %>
+    </td>
+    </tr>
 <% end %>

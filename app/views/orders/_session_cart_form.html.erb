@@ -1,1 +1,22 @@
-session cart
+
+  <% session[:cart].each do |pid, qauntity| %>
+    <% product = Product.find(pid) %>
+    <tr>
+      <td class="col-sm-7">
+        <%= product.name %>
+        <br>
+        <%= product.category.name %>
+        <br>
+        $<%= product.price %>
+      </td>
+      <td class="col-sm-5">
+        <%= label_tag :quantity, "quantity" %>
+        <%= text_field_tag :quantity, qauntity %>
+
+      </td>
+    </tr>
+
+  <% end %>
+  <tr>
+    <td><%= button_tag "Update Order Contents" %></td>
+  </tr>

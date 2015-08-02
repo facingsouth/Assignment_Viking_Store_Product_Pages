@@ -1,1 +1,96 @@
-checkout.html.erb
+<div class="panel">
+  <div class="panel-heading text-center">
+    <h1>Checkout</h1>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <%= form_for @order, class: "form-group" do |f| %>
+        <div class="panel col-sm-6">
+          <div class="panel-heading text-center">
+            <h3>Shipping + Billing</h3>
+          </div>
+          <div class="panel-body">
+            <div class="col-xs-12">
+              <%= f.label :shipping_id, "Shipping Address" %>
+              <%= f.collection_select(:shipping_id, 
+                                    current_user.addresses, 
+                                    :id,
+                                    :full_address,
+                                    {},
+                                    class: "form-control" ) %>
+            </div>
+            <div class="col-xs-12">
+              <%= f.label :billing_id, "Billing Address" %>
+              <%= f.collection_select(:billing_id, 
+                                    current_user.addresses, 
+                                    :id,
+                                    :full_address,
+                                    {},
+                                    class: "form-control" ) %>
+            </div>
+            <div class="col-xs-12">
+              <%= link_to "Edit saved addresses", edit_user_path(current_user) %>
+            </div>
+            <%= f.fields_for :credit_cards, @credit_card do |c_fields| %>
+              <div class="col-xs-12">
+                <%= c_fields.label :card_number, "Credit Card Number" %>
+                <%= c_fields.text_field :card_number, class: "form-control" %>
+              </div>
+              <div class="col-xs-6">
+                <%= c_fields.label :exp_month, "Exp Month" %>
+                <%= c_fields.text_field :exp_month, class: "form-control" %>
+              </div>
+              <div class="col-xs-6">
+                <%= c_fields.label :exp_year, "Exp Year" %>
+                <%= c_fields.text_field :exp_year, class: "form-control" %>
+              </div>
+            <% end %>
+          </div> <!-- panel-body  -->
+        </div> <!-- panel  -->
+
+        <div class="panel col-sm-6">
+          <div class="panel-heading text-center">
+            <h3>Review + Complete</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table-striped">
+              <tr>
+                <th class="col-xs-3">Product</th>
+                <th class="col-xs-3">Quantity</th>
+                <th class="col-xs-3">Price</th>
+                <th class="col-xs-3">Total Price</th>
+              </tr>
+              <% @order.order_contents.each do |oc| %>
+                <tr>
+                  <td><%= oc.product.name %></td>
+                  <td><%= oc.quantity %></td>
+                  <td>$<%= oc.product.price %></td>
+                  <td>$<%= oc.value %></td>
+                </tr>
+              <% end %>
+            </table>
+            <div class="col-sm-5">
+              <%= link_to "Edit Order", "#" %>
+              <br>
+              <%= link_to "Delete Order", "#" %>
+            </div>
+            <div class="col-sm-7">
+              Shipping: $12<br>
+              Tax:      $12<br>
+              Total:    <%= @order.value %>  
+            </div>
+          </div> <!-- panel-body  -->
+        </div> <!-- panel  -->
+
+        <div class="panel col-sm-6 pull-right">
+          <div class="panel-heading text-center">
+            <h3>Place Your Order</h3>
+          </div>
+          <div class="panel-body text-center">
+            <%= f.submit "Place Order!", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
